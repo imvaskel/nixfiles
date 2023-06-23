@@ -41,8 +41,10 @@
 
       homeConfigurations."austin@artemis.lan" = hm {
         system = "aarch64-darwin";
-        homeDirectory = "/Users/austin";
+        home-directory = "/Users/austin";
       };
+
+      darwinConfigurations.artemis =  import hosts/artemis.nix inputs;
 
       nixosConfigurations = {
         nixos-wsl = lib.nixosSystem {

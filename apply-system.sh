@@ -1,4 +1,8 @@
 #!/bin/sh
 pushd ~/dotfiles
-sudo nixos-rebuild switch --flake .#
+if [ "$(uname -s)" = "Darwin" ]; then
+    darwin-rebuild switch --flake .#
+else
+    sudo nixos-rebuild switch --flake .#
+fi
 popd
