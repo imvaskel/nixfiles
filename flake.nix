@@ -13,6 +13,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
   outputs = { nixpkgs, home-manager, darwin, ... }@inputs:
@@ -21,7 +23,7 @@
         , home-directory ? "/home/austin" }:
         home-manager.lib.homeManagerConfiguration {
           modules = [
-            ./home/home.nix
+            ./home/home.nix inputs.nix-doom-emacs.hmModule
             ({ ... }: {
               home.username = name;
               home.homeDirectory = home-directory;
@@ -37,7 +39,7 @@
 
       lib = nixpkgs.lib;
     in {
-      homeConfigurations."austin@nixos-wsl" = hm { system = "x86_64-linux"; };
+      homeConfigurations."austin@Austins-PC" = hm { system = "x86_64-linux"; };
 
       homeConfigurations."austin@artemis.lan" = hm {
         system = "aarch64-darwin";
@@ -47,9 +49,9 @@
       darwinConfigurations.artemis =  import hosts/artemis.nix inputs;
 
       nixosConfigurations = {
-        nixos-wsl = lib.nixosSystem {
+        "Austins-PC" = lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./hosts/nixos-wsl ];
+          modules = [ ./hosts/pc ];
         };
       };
     };

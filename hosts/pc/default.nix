@@ -26,6 +26,7 @@ in
   };
   programs.fish.enable = true;
   programs.neovim.enable = true;
+  programs.dconf.enable = true;
 
   # Enable nix flakes
   nix.package = pkgs.nixFlakes;
@@ -36,5 +37,4 @@ in
   system.stateVersion = "22.05";
   users.users.austin.shell = pkgs.fish;
 
-  networking.hostName = "nixos-wsl";
 }
