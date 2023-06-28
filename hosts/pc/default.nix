@@ -37,4 +37,7 @@ in
   system.stateVersion = "22.05";
   users.users.austin.shell = pkgs.fish;
 
+  time.timeZone = "America/New_York";
+  networking.hostName = "Austins-PC";
+
 }
