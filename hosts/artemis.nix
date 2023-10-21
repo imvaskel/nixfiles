@@ -1,10 +1,14 @@
-{ darwin, home-manager, nixpkgs, ... }:
-
+{
+  darwin,
+  home-manager,
+  nixpkgs,
+  ...
+}:
 darwin.lib.darwinSystem {
   system = "aarch64-darwin";
   modules = [
-    ({ ... }: {
-      users.users.austin = { name = "austin"; };
+    ({...}: {
+      users.users.austin = {name = "austin";};
 
       services.nix-daemon.enable = true;
 
@@ -15,5 +19,4 @@ darwin.lib.darwinSystem {
     })
   ];
   # system.stateVersion = 4;
-
 }

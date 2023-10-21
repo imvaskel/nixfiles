@@ -1,12 +1,14 @@
-{ pkgs, ... }:
-
 {
+  pkgs,
+  flags,
+  ...
+}: {
   home.sessionVariables = {
     GTK_THEME = "Gruvbox-Dark-BL-LB";
   };
 
   gtk = {
-    enable = true;
+    enable = !flags.headless;
     theme = {
       name = "GruvBox";
       package = pkgs.gruvbox-gtk-theme;

@@ -1,73 +1,68 @@
 {
-  description = "Vaskel's NixOS system configs.";
-
   inputs = {
-    nixpkgs.
-    url = "github:nixos/nixpkgs/nixpkgs-unstable";
-
-    darwin = {
-      url = "github:lnl7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/master";
+    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
-
-  outputs = { nixpkgs, home-manager, darwin, ... }@inputs:
-    let
-      hm =
-        { system
-        , specialArgs ? { }
-        , name ? "austin"
-        , home-directory ? "/home/austin"
-        }:
-        home-manager.lib.homeManagerConfiguration {
-          modules = [
-            ./home/home.nix
-            inputs.nix-doom-emacs.hmModule
-            ({ ... }: {
-              home.username = name;
-              home.homeDirectory = home-directory;
-            })
-          ];
-          pkgs = import nixpkgs {
-            config.allowUnfree = true;
-            inherit system;
-            overlays = [
-              (import (builtins.fetchTarball {
-                url = "https://github.com/nix-community/emacs-overlay/tarball/8b343d6fee8481e33e529bf988e61801ca3d1178";
-                sha256 = "1b1rm46ax9440dsiz1sqz7kpqrqdk29mvn02y8v7bfandlsgs0b5";
-              }))
+  outputs = {
+    self,
+    utils,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+    mkSystem = {
+      hostname,
+      system ? "x86_64-linux",
+      users,
+      flags ? {},
+      overrides ? {},
+    } @ args: overrides: let
+      mkConfig = {
+        hostname,
+        system ? "x86_64-linux",
+        users,
+        flags ? {},
+      }: rec {
+        inherit system;
+        specialArgs = {
+          inherit hostname inputs flags;
+        };
+        modules = [
+          ./hosts/${hostname}/configuration.nix
+          ./mixins/nix.nix
+          inputs.vscode-server.nixosModules.default
+          {
+            system.stateVersion = "23.05";
+            services.dbus.enable = true;
+            services.vscode-server.enable = true;
+          }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.verbose = true;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.sharedModules = [
+              {home.stateVersion = "23.05";}
             ];
-          };
-
-          extraSpecialArgs = specialArgs;
-        };
-
-      lib = nixpkgs.lib;
+            home-manager.users = users;
+          }
+        ];
+      };
     in
-    {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+      nixpkgs.lib.nixosSystem ((mkConfig args) // overrides (mkConfig args));
+  in {
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
-      homeConfigurations."austin@Austins-PC" = hm { system = "x86_64-linux"; };
-
-      homeConfigurations."austin@artemis.lan" = hm {
-        system = "aarch64-darwin";
-        home-directory = "/Users/austin";
+    nixosConfigurations.nova = (mkSystem {
+      hostname = "nova";
+      users = {vaskel = ./home;};
+      flags = {
+        headless = true;
       };
-
-      darwinConfigurations.artemis = import hosts/artemis.nix inputs;
-
-      nixosConfigurations = {
-        "Austins-PC" = lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ ./hosts/pc ];
-        };
-      };
-    };
+    }) (_: {});
+  };
 }

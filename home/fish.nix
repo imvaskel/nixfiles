@@ -1,6 +1,8 @@
-{ pkgs, home-manager, ... }:
-
 {
+  pkgs,
+  home-manager,
+  ...
+}: {
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
