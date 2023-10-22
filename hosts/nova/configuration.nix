@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -24,7 +20,7 @@
   networking = {
     hostName = "nova";
     firewall.enable = true;
-    firewall.allowedTCPPorts = [22 443 80];
+    firewall.allowedTCPPorts = [443 80];
   };
 
   time.timeZone = "America/New_York";
@@ -47,6 +43,17 @@
     settings = {
       PermitRootLogin = "no";
       PasswordAuthentication = false;
+    };
+    openFirewall = true;
+  };
+
+  services.gitea = {
+    enable = true;
+    settings = {
+      server = {
+        DOMAIN = "git.vaskel.gay";
+        ROOT_URL = "https://git.vaskel.gay";
+      };
     };
   };
 

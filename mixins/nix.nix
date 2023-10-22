@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}:
+{lib, ...}:
 with lib; {
   config = mkOverride 100 {
     nixpkgs.config.allowUnfree = true;
