@@ -7,14 +7,13 @@
     ./xdg.nix
     ./starship
     ./nvim
-    ./fish.nix
+    ./shell.nix
     ./gtk.nix
   ];
 
   home.packages = with pkgs; [
-    nixfmt
+    direnv
     git
-    nil
   ];
 
   home.stateVersion = "23.05";

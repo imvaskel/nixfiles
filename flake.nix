@@ -1,6 +1,8 @@
 {
+  description = "My NixOS and home-manager configurations.;";
+
   inputs = {
-    utils.url = "github:numtide/flake-utils";
+    flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/release-23.05";
@@ -8,7 +10,7 @@
   };
   outputs = {
     self,
-    utils,
+    flake-utils,
     nixpkgs,
     home-manager,
     ...
@@ -55,8 +57,6 @@
     in
       nixpkgs.lib.nixosSystem ((mkConfig args) // overrides (mkConfig args));
   in {
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-
     nixosConfigurations.nova = (mkSystem {
       hostname = "nova";
       users = {vaskel = ./home;};
@@ -64,5 +64,14 @@
         headless = true;
       };
     }) (_: {});
+
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+
+    devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
+      packages = with nixpkgs.legacyPackages.x86_64-linux; [
+        alejandra # formatter
+        nil # LSP
+      ];
+    };
   };
 }
