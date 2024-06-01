@@ -10,6 +10,7 @@
   # manage.
   home.username = "skylar";
   home.homeDirectory = "/home/skylar";
+  news.display = "silent";
 
   dotfiles.type.graphical = true;
 

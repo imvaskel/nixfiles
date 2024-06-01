@@ -35,6 +35,7 @@
     nixpkgs,
     home-manager,
     nixgl,
+    hyprland,
     ...
   }: let
     system = "x86_64-linux";
@@ -46,6 +47,7 @@
     commonImports = [
       (lib.fileset.toList ./home/modules)
       (lib.fileset.toList ./home/common)
+      hyprland.homeManagerModules.default
     ];
   in {
     homeConfigurations."skylar" = home-manager.lib.homeManagerConfiguration {
@@ -71,6 +73,11 @@
         alejandra # formatter
         nil # LSP
       ];
+    };
+
+    packages.${system} = {
+      "gruvbox-material-gtk" = pkgs.callPackage ./pkgs/gruvbox_material_gtk.nix {};
+      "capitaine-cursors" = pkgs.callPackage ./pkgs/capitaine_cursors.nix {};
     };
   };
 }
