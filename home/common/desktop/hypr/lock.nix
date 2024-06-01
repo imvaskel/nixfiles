@@ -1,5 +1,12 @@
-{...}: {
-  programs.hyprlock = {
+{
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.dotfiles.type;
+  inherit (lib) mkIf;
+in {
+  config.programs.hyprlock = mkIf cfg.graphical {
     enable = true;
     settings = {
       "$font" = "M+1Code Nerd Font Mono";
@@ -21,6 +28,7 @@
         no_fade_in = false;
         grace = 0;
         disable_loading_bar = true;
+        pam_module = "su";
       };
 
       # INPUT FIELD

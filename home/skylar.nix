@@ -8,14 +8,10 @@
 }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = user.name;
-  home.homeDirectory = user.home;
+  home.username = "skylar";
+  home.homeDirectory = "/home/skylar";
 
-  imports = [
-    ./desktop
-    ./shell
-    ./git.nix
-  ];
+  dotfiles.type.graphical = true;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

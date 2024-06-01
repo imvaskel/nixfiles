@@ -1,8 +1,15 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+  cfg = config.dotfiles.type;
+  inherit (lib) mkIf;
 in {
-  services.hypridle = {
+  config.services.hypridle = mkIf cfg.graphical {
     enable = true;
     settings = {
       general = {
