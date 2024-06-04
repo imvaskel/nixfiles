@@ -8,8 +8,10 @@
 }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "skylar";
-  home.homeDirectory = "/home/skylar";
+  home = {
+    username = "skylar";
+    homeDirectory = "/home/skylar";
+  };
   news.display = "silent";
 
   dotfiles.type.graphical = true;

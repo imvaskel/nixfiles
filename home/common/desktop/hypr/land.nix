@@ -13,8 +13,7 @@
     red = "rgb(ea6962)";
     green = "rgb(a9b665)";
   };
-  hyprland = pkgs.hyprland;
-  hypridle = pkgs.hypridle;
+  inherit (pkgs) hyprland hypridle;
   cfg = config.dotfiles.type;
   inherit (lib) mkIf;
 in {

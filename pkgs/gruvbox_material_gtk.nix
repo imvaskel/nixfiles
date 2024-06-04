@@ -13,7 +13,7 @@ stdenvNoCC.mkDerivation rec {
     owner = "TheGreatMcPain";
     repo = "gruvbox-material-gtk";
     rev = "a1295d8bcd4dfbd0cd6793d7b1583b442438ed89";
-    sha256 = "VumO8F4ZrFI6GZU1XXaw4MCnP+Nla1rVS3uuSUzpl9E=";
+    sha256 = "sha256-VumO8F4ZrFI6GZU1XXaw4MCnP+Nla1rVS3uuSUzpl9E=";
   };
 
   propagatedUserEnvPkgs = [

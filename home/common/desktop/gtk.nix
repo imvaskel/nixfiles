@@ -17,12 +17,12 @@ in {
         package = self.gruvbox-material-gtk;
       };
       iconTheme = {
-        name = "Gruvbox-Material-Dark";
-        package = self.gruvbox-material-gtk;
+        name = "Gruvbox-Plus-Dark";
+        package = self.gruvbox-plus-icons;
       };
       cursorTheme = {
         name = "Capitaine Cursors (Gruvbox)";
-        package = self.capitaine-cursors;
+        package = pkgs.capitaine-cursors-themed;
       };
     };
   };

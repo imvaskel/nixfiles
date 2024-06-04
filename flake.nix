@@ -43,7 +43,7 @@
       inherit system;
       overlays = [nixgl.overlay];
     };
-    lib = pkgs.lib;
+    inherit (pkgs) lib;
     commonImports = [
       (lib.fileset.toList ./home/modules)
       (lib.fileset.toList ./home/common)
@@ -64,6 +64,7 @@
           inherit system;
         };
         inherit inputs;
+        flakePath = "~/nixfiles";
       };
     };
 
@@ -72,12 +73,32 @@
       packages = with pkgs; [
         alejandra # formatter
         nil # LSP
+        statix # Lints
+        # Applies some patches to allow passing --extra-experimental-features
+        (pkgs.nix-prefetch.overrideAttrs (old: {
+          patches =
+            old.patches
+            ++ [
+              (fetchpatch {
+                name = "msteen-nix-prefetch-pull-34.patch";
+                url = "https://github.com/msteen/nix-prefetch/pull/34/commits/c5744efd558ba1dd3db7c2bc2152511556d4454a.patch";
+                hash = "sha256-4mpMmF5jb5R2qmTjtw3mXnIYMkPmPQAtWSzGgSH+5R0=";
+              })
+            ];
+        }))
       ];
     };
 
-    packages.${system} = {
-      "gruvbox-material-gtk" = pkgs.callPackage ./pkgs/gruvbox_material_gtk.nix {};
-      "capitaine-cursors" = pkgs.callPackage ./pkgs/capitaine_cursors.nix {};
-    };
+    packages.${system} = let
+      files = map builtins.baseNameOf (lib.fileset.toList ./pkgs);
+      sanitizeName = builtins.replaceStrings [".nix" "_"] ["" "-"];
+    in
+      builtins.listToAttrs (
+        map (name: {
+          name = sanitizeName name;
+          value = pkgs.callPackage ./pkgs/${name} {};
+        })
+        files
+      );
   };
 }

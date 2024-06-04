@@ -4,7 +4,8 @@
   lib,
   ...
 }: let
-  hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
+  #hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
+  hyprlock = "/usr/bin/hyprlock"; # TODO: Debug why hyprlock pam fails.
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   cfg = config.dotfiles.type;
   inherit (lib) mkIf;
