@@ -4,13 +4,14 @@
   user,
   flags,
   lib,
+  flakePath,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home = {
-    username = "skylar";
-    homeDirectory = "/home/skylar";
+    username = user.name;
+    homeDirectory = user.home;
   };
   news.display = "silent";
 
@@ -78,7 +79,9 @@
   #  /etc/profiles/per-user/skylar/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    FLAKE = flakePath;
+    # it seems that ssh doesn't like when i do ``~/``?
+    SSH_AUTH_SOCK = "${user.home}/.1password/agent.sock";
   };
 
   # Let Home Manager install and manage itself.

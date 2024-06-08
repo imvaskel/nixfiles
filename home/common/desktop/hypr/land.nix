@@ -117,7 +117,7 @@ in {
           "${mainMod}, T, exec, $terminal"
           "${mainMod}, Q, killactive,"
           "${mainMod}, M, exit,"
-          "${mainMod}, E, exec, $fileManager"
+          "${mainMod}, E, exec, thunar"
           "${mainMod}, A, exec, ~/.config/hypr/scripts/floating.fish"
           "${mainMod}, D, exec, ~/.config/hypr/scripts/discord.fish"
           "${mainMod}, P, pseudo, # dwindle"

@@ -57,14 +57,15 @@
         commonImports
       ];
 
-      extraSpecialArgs = {
+      extraSpecialArgs = let
+        name = "skylar";
+        home = "/home/${name}";
+      in {
         user = {
-          home = "/home/skylar";
-          name = "skylar";
-          inherit system;
+          inherit name home system;
         };
         inherit inputs;
-        flakePath = "~/nixfiles";
+        flakePath = "${home}/nixfiles";
       };
     };
 
