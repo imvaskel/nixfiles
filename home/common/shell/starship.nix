@@ -1,8 +1,9 @@
-{pkgs, ...}: let
-  starship = "${pkgs.starship}/bin/starship";
-in {
+{pkgs, ...}: {
   # Set up transient prompt
   programs.fish.interactiveShellInit = ''
+    eval (starship init fish)
+    enable_transience
+
     function starship_transient_prompt_func
       starship module character
     end
@@ -10,8 +11,8 @@ in {
 
   programs.starship = {
     enable = true;
-    enableFishIntegration = true;
-    enableTransience = true;
+    enableFishIntegration = false; # managed ourselves
+    enableBashIntegration = false; # i don't use bash, but this breaks it too.
     settings = {
       # Kinda cursed, but it's w/e
       format =

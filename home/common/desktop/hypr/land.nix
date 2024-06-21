@@ -32,14 +32,7 @@ in {
 
     wayland.windowManager.hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       systemd.variables = ["--all"];
-      plugins = [
-        inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-        inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-        # inputs.hycov.packages.${pkgs.system}.hycov
-        #TODO: Broken inputs.hyprspace.packages.${pkgs.system}.Hyprspace
-      ];
       settings = {
         "$terminal" = "kitty";
         "$fieManager" = "thunar";
@@ -106,6 +99,8 @@ in {
           "float, class:.*"
           "workspace name:Discord,class:vesktop"
           "pin,class:gay.vaskel.Soteria"
+          "stayfocused, title:^()$,class:^(steam)$"
+          "minsize 1 1, title:^()$,class:^(steam)$"
         ];
 
         layerrule = [
@@ -181,6 +176,10 @@ in {
           ",XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
           ",XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%"
           ",XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%"
+
+          # 1password forwarding
+          "CTRL and SHIFT, space, pass, class:1Password"
+          "CTRL, \\, pass, class:1password"
         ];
 
         bindm = [
