@@ -16,19 +16,21 @@
   inherit (pkgs) hyprland hypridle;
   cfg = config.dotfiles.type;
   inherit (lib) mkIf;
+
+  discordScript = pkgs.writeShellScriptBin "discord-switcher" ''
+    hyprctl dispatch togglespecialworkspace discord
+
+    # If discord isn't opened, open it.
+    if ! hyprctl clients -j | jq -e '.[] | select(.class=="vesktop")'; then
+        hyprctl dispatch exec vesktop
+    fi
+  '';
 in {
   config = mkIf cfg.graphical {
     home.packages = [
       pkgs.nixgl.nixGLMesa
       pkgs.nixgl.nixVulkanMesa
     ];
-
-    # Kind of rigged, but nixgl memes i suppose.
-    home.file.".config/hypr/run.sh".text = ''
-      #!/bin/sh
-      PATH=$PATH:${pkgs.nixgl.nixGLMesa}/bin
-      nixGLMesa Hyprland
-    '';
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -97,7 +99,7 @@ in {
         windowrulev2 = [
           "suppressevent maximize, class:.* # You'll probably like this."
           "float, class:.*"
-          "workspace name:Discord,class:vesktop"
+          "workspace special:discord,class:vesktop"
           "pin,class:gay.vaskel.Soteria"
           "stayfocused, title:^()$,class:^(steam)$"
           "minsize 1 1, title:^()$,class:^(steam)$"
@@ -114,7 +116,6 @@ in {
           "${mainMod}, M, exit,"
           "${mainMod}, E, exec, thunar"
           "${mainMod}, A, exec, ~/.config/hypr/scripts/floating.fish"
-          "${mainMod}, D, exec, ~/.config/hypr/scripts/discord.fish"
           "${mainMod}, P, pseudo, # dwindle"
           "${mainMod}, J, togglesplit, # dwindle"
           "${mainMod}, F, fullscreen, 1"
@@ -151,9 +152,8 @@ in {
           "${mainMod} SHIFT, 9, movetoworkspace, 9"
           "${mainMod} SHIFT, 0, movetoworkspace, 10"
 
-          # Example special workspace (scratchpad)
-          "${mainMod}, S, togglespecialworkspace, magic"
-          "${mainMod} SHIFT, S, movetoworkspace, special:magic"
+          # Discord special workspace (this is better than how i was doing it before)
+          "${mainMod}, D, exec, ${discordScript}/bin/discord-switcher"
 
           # Scroll through existing workspaces with mainMod + scroll
           "${mainMod}, mouse_down, workspace, e+1"
