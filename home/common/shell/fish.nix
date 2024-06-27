@@ -6,10 +6,12 @@
 }: let
   homeManger = pkgs.home-manager;
 in {
-  home.packages = with pkgs; [nh];
-
   programs.fish = {
     enable = true;
+    interactiveShellInit = ''
+        fish_add_path $HOME/.local/bin
+        fish_add_path $HOME/.cargo/bin
+    '';
     functions = {
       fish_greeting = "";
       devcon = {
@@ -26,6 +28,30 @@ in {
         '';
         wraps = "devcontainer";
       };
+      "random-rename" = ''
+        if ! test -e $argv[1]
+          echo "$(status basename): error: the argument $argv[1] does not exist"
+          return 1
+        end
+        if path extension $argv[1]
+          set extension (path extension $argv[1])
+        else
+          set extension ""
+        end
+
+        set file "$(head /dev/urandom | tr -dc a-z0-9 | head -c 8 )$extension"
+        if test -e $file
+          echo "$(status basename): error: somehow the random file $file collided with another"
+          return 1
+        end
+
+        mv $argv[1] $file 2&> /dev/null
+        if test $status -eq 0
+          echo "moved to $file"
+        else
+          echo "somehow there was an error"
+        end
+      '';
     };
     shellAbbrs = {
       ls = "eza";

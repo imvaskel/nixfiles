@@ -62,6 +62,10 @@ in {
         input = {
           kb_layout = "us";
           follow_mouse = 1;
+          kb_variant = "";
+          kb_model = "";
+          kb_options = "compose:menu"; # set compose to the menu key (below rshift)
+          numlock_by_default = true;
         };
 
         general = {
