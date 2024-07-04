@@ -6,11 +6,15 @@
 }: let
   homeManger = pkgs.home-manager;
 in {
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
-        fish_add_path $HOME/.local/bin
-        fish_add_path $HOME/.cargo/bin
+      fish_add_path $HOME/.local/bin
+      fish_add_path $HOME/.cargo/bin
     '';
     functions = {
       fish_greeting = "";
