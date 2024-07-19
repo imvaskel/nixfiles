@@ -9,72 +9,66 @@ in {
   config.programs.hyprlock = mkIf cfg.graphical {
     enable = true;
     settings = {
-      "$font" = "M+1Code Nerd Font Mono";
-      "$fore" = "rgb(d4be98)";
+      # https://github.com/vernette/Hyprsnap/blob/main/.config/hypr/hyprlock.conf
+      general = {
+        disable_loading_bar = true;
+        hide_cursor = true;
+        ignore_empty_input = true;
+      };
 
       background = {
         monitor = "";
-        #path = ~/Pictures/dune.png
-        # blur_passes = 3
-        # contrast = 0.8916
-        # brightness = 0.8172
-        # vibrancy = 0.1696
-        # vibrancy_darkness = 0.0
-        color = "rgb(282828)";
-      };
-
-      # GENERAL
-      general = {
-        no_fade_in = false;
-        grace = 0;
-        disable_loading_bar = true;
-        pam_module = "su";
-      };
-
-      # INPUT FIELD
-      input-field = {
-        monitor = "";
-        size = "250, 60";
-        outline_thickness = 2;
-        dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
-        dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
-        dots_center = true;
-        outer_color = "rgba(282828ff)";
-        inner_color = "rgba(32302fff)";
-        font_color = "rgb(d4be98)";
-        fade_on_empty = false;
-        font_family = "M+1Code Nerd Font Mono";
-        placeholder_text = ''<i><span foreground="##d4be98">Input Password...</span></i>'';
-        hide_input = false;
-        position = "0, -120";
-        halign = "center";
-        valign = "center";
+        path = "~/Pictures/Wallpapers/current";
+        blur_passes = 3;
+        blur_size = 5;
       };
 
       label = [
-        # TIME
         {
           monitor = "";
-          text = "cmd[update:1000] date +%I:%M";
-          color = "$fore";
-          font_size = 120;
-          font_family = "$font SemBd";
-          position = "0, -300";
+          text = ''cmd[update:1000] echo "<b><big> $(date +"%H:%M") </big></b>"'';
+          color = "rgba(255, 255, 255, 0.8)";
+          font_size = 64;
+          font_family = "JetBrains Mono Nerd Font 10";
+          position = "0, 50";
           halign = "center";
-          valign = "top";
+          valign = "center";
         }
-        # USER
+
         {
           monitor = "";
-          text = "Welcome back, $USER.";
-          color = "$fore";
-          font_size = 25;
-          font_family = "$font";
-          position = "0, -40";
+          text = "Type to unlock";
+          color = "rgba(255, 255, 255, 0.4)";
+          font_size = 20;
+          font_family = "JetBrainsMono Nerd Font";
+          position = "0, 30";
           halign = "center";
           valign = "center";
         }
       ];
+
+      input-field = {
+        monitor = "";
+        size = "200, 50";
+        outline_thickness = 0;
+        dots_size = 0.25;
+        dots_spacing = 0.3;
+        dots_center = true;
+        dots_rounding = -1;
+        inner_color = "rgba(0, 0, 0, 0.2)";
+        font_color = "rgba(255, 255, 255, 0.6)";
+        fail_color = "rgba(255, 60, 60, 0.2)";
+        fade_on_empty = true;
+        fade_timeout = 200;
+        placeholder_text = "";
+        fail_text = "Wrong password <b>($ATTEMPTS)</b>";
+        fail_transition = 300;
+        hide_input = false;
+        rounding = -1;
+        position = "0, -200";
+        halign = "center";
+        valign = "center";
+      };
     };
   };
 }

@@ -2,9 +2,11 @@
   pkgs,
   lib,
   flakePath,
+  config,
   ...
 }: let
   homeManger = pkgs.home-manager;
+  cfg = config.dotfiles.type;
 in {
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -15,6 +17,12 @@ in {
     interactiveShellInit = ''
       fish_add_path $HOME/.local/bin
       fish_add_path $HOME/.cargo/bin
+
+      ${lib.optionalString cfg.graphical ''
+        if test $SHLVL -eq 1; and command -q pokemon-colorscripts
+            rustmon print --name random
+        end
+      ''}
     '';
     functions = {
       fish_greeting = "";

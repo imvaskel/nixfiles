@@ -14,7 +14,12 @@ in {
       core = {
         autoclrf = false;
         ignorecase = true;
+        pager = "delta";
       };
+      interactive.diffFilter = "delta --color-only";
+      delta.navigate = true;
+      merge.conflictstyle = "diff3";
+      diff.colorMoved = "default";
       color.ui = "auto";
       init.defaultBranch = "main";
       help.autocorrect = 20;
