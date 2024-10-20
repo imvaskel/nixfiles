@@ -28,7 +28,7 @@ in {
         autoSetupRemote = true;
         followTags = true;
       };
-      pull.ff = true;
+      pull.ff = "only";
       url."git@github.com:" = {
         pushInsteadOf = "https://github.com";
         insteadOf = "gh:";

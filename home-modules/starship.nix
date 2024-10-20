@@ -11,8 +11,6 @@
 
   programs.starship = {
     enable = true;
-    enableFishIntegration = false; # managed ourselves
-    enableBashIntegration = false; # i don't use bash, but this breaks it too.
     settings = let
       yellow = "#E1C269";
       white = "#DAD1D2";
@@ -201,7 +199,7 @@
       };
 
       character = {
-        success_symbol = " [](fg:${purple}) ";
+        success_symbol = " [❯](fg:${purple}) ";
         error_symbol = " [✘](bold red) ";
       };
     };
