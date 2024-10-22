@@ -25,4 +25,6 @@ in {
   home.packages = [
     rebuild
   ];
+
+  programs.fzf.enable = true;
 }
