@@ -33,7 +33,4 @@ alias upd = docker compose up -d
 alias down = docker compose down
 alias downd = docker compose down
 
-
-krabby random -i
-
 use ~/.cache/starship/init.nu

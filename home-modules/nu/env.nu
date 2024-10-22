@@ -13,9 +13,9 @@ $env.NU_LIB_DIRS ++= ($env.NUPM_HOME | path join "modules")
 # ssh
 $env.SSH_AUTH_SOCK = $"($env.HOME)/.1password/agent.sock"
 
-$env.JAVA_HOME = ^/usr/libexec/java_home -v 17
+$env.JAVA_HOME = (/usr/libexec/java_home -v 17)
 
-path add [ 
+path add [
     $"($env.HOMEBREW_PREFIX)/bin"
     $"($env.HOMEBREW_PREFIX)/sbin"
     $"($env.HOME)/.local/bin"

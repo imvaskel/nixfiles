@@ -1,11 +1,8 @@
 {
   lib,
-  config,
-  pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption;
-  cfg = config.dotfiles;
+  inherit (lib) mkEnableOption;
 in {
   options.dotfiles = {
     type = {

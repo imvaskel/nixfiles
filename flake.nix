@@ -50,6 +50,17 @@
         ...
       }: {
         formatter = pkgs.alejandra;
+        packages = let
+          files = map builtins.baseNameOf (pkgs.lib.fileset.toList ./pkgs);
+          sanitizeName = builtins.replaceStrings [".nix" "_"] ["" "-"];
+        in
+          builtins.listToAttrs (
+            map (name: {
+              name = sanitizeName name;
+              value = pkgs.callPackage ./pkgs/${name} {};
+            })
+            files
+          );
       };
     };
 }
