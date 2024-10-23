@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{...}: let
   configDir = "~/.config/git";
 in {
   programs.git = {
@@ -10,14 +10,17 @@ in {
         path = "${configDir}/config.local";
       }
     ];
+    delta = {
+      enable = true;
+      options = {
+        navigate = true;
+      };
+    };
     extraConfig = {
       core = {
         autoclrf = false;
         ignorecase = true;
-        pager = "delta";
       };
-      interactive.diffFilter = "delta --color-only";
-      delta.navigate = true;
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
       color.ui = "auto";
