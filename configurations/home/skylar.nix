@@ -1,7 +1,6 @@
 {
-  config,
   pkgs,
-  lib,
+  flake,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin;
@@ -11,7 +10,13 @@
     then "/Users/"
     else "/home/";
   homeDirectory = prefix + username;
+
+  inherit (flake.inputs) self;
 in {
+  imports = [
+    self.homeModules.default
+  ];
+
   home = {
     inherit username homeDirectory;
   };

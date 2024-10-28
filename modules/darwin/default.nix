@@ -1,9 +1,14 @@
 {
   pkgs,
+  flake,
   lib,
-  ezModules,
   ...
-}: {
+}: let
+  inherit (flake) inputs;
+  inherit (inputs) self;
+in {
+  imports = lib.attrValues (lib.filterAttrs (k: v: k != "default") self.darwinModules);
+
   services.nix-daemon.enable = true;
   security.pam.enableSudoTouchIdAuth = true;
 
@@ -14,8 +19,4 @@
     pkgs.zsh
     pkgs.fish
   ];
-
-  imports = lib.attrValues {
-    inherit (ezModules) fonts homebrew;
-  };
 }

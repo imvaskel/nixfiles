@@ -1,4 +1,14 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  flake,
+  ...
+}: let
+  inherit (flake.inputs) self;
+in {
+  imports = [
+    self.darwinModules.default
+  ];
+
   nixpkgs = {
     hostPlatform = "aarch64-darwin";
     config.allowUnfree = true;
