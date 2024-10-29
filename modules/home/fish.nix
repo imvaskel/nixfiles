@@ -22,7 +22,18 @@ in {
         end
       ''}
     '';
-    functions.fish_greeting = "";
+    functions = {
+      fish_greeting = "";
+      edit = {
+        body = ''
+          $EDITOR $argv
+        '';
+        wraps = config.home.sessionVariables.EDITOR;
+      };
+      take = ''
+        mkdir $argv && cd $argv
+      '';
+    };
     shellAliases = {
       ls = "${pkgs.eza}/bin/eza";
       la = "${pkgs.eza}/bin/eza -a";

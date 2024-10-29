@@ -1,16 +1,12 @@
 {pkgs, ...}: {
   # Set up transient prompt
-  programs.fish.interactiveShellInit = ''
-    eval (starship init fish)
-    enable_transience
-
-    function starship_transient_prompt_func
-      starship module character
-    end
+  programs.fish.functions.starship_transient_prompt_func = ''
+    ${pkgs.starship}/bin/starship module character
   '';
 
   programs.starship = {
     enable = true;
+    enableTransience = true;
     settings = let
       yellow = "#E1C269";
       white = "#DAD1D2";
