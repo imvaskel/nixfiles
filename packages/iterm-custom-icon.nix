@@ -17,7 +17,6 @@ stdenvNoCC.mkDerivation {
 
   installPhase = ''
     FILE="$out/Applications/iTerm2.app/Contents/Resources/"
-    ls
     mkdir -p $FILE
     cp iterm_w.icns "$FILE/AppIcon.icns"
     cp -nr ${iterm2}/* "$out/"
