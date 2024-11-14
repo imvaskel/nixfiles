@@ -17,6 +17,9 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     nixos-unified.url = "github:srid/nixos-unified";
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+    };
   };
 
   outputs = inputs:
