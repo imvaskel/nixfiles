@@ -19,10 +19,5 @@
   };
 
   flake = {
-    # probably rigged but w/e
-    packages."aarch64-darwin"."iterm-custom-icon" = let
-      pkgs = (import inputs.nixpkgs) {system = "aarch64-darwin";};
-    in
-      pkgs.callPackage "${self}/packages/iterm-custom-icon.nix" {};
   };
 }
