@@ -18,7 +18,7 @@ in {
 
       ${lib.optionalString cfg.graphical ''
         if test $SHLVL -eq 1
-            ${pkgs.krabby}/bin/krabby random -i
+            ${lib.getExe pkgs.krabby} random -i
         end
       ''}
     '';

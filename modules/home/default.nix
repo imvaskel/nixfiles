@@ -22,9 +22,8 @@ in {
 
   home.packages = allPackages;
 
+  nix.package = pkgs.lix;
   nixpkgs.config.allowUnfree = true;
-  # temporary
-  nixpkgs.config.allowBroken = true;
 
   programs.direnv.enable = true;
 }
