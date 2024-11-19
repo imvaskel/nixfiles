@@ -39,6 +39,8 @@ in {
       la = "${pkgs.eza}/bin/eza -a";
       ll = "${pkgs.eza}/bin/eza --git -lg --icons";
       lla = "${pkgs.eza}/bin/eza --git --lga --icons";
+      rebuild-system = "nix run $FLAKE#";
+      rebuild-user = "rebuild-system $USER@";
     };
   };
 }

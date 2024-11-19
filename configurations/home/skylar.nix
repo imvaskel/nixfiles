@@ -10,6 +10,9 @@
     then "/Users/"
     else "/home/";
   homeDirectory = prefix + username;
+  flakePath = homeDirectory + (if isDarwin
+    then "/Developer/nixfiles"
+    else "/nixfiles");
 
   inherit (flake.inputs) self;
 in {
@@ -75,7 +78,7 @@ in {
   #  /etc/profiles/per-user/skylar/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    FLAKE = "~/nixfiles";
+    FLAKE = flakePath;
     SSH_AUTH_SOCK = "~/.1password/agent.sock";
   };
 

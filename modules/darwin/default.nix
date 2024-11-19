@@ -12,6 +12,7 @@ in {
   services.nix-daemon.enable = true;
   security.pam.enableSudoTouchIdAuth = true;
   nix.gc.automatic = true;
+  nix.package = pkgs.lix;
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
