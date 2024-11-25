@@ -10,9 +10,13 @@
     then "/Users/"
     else "/home/";
   homeDirectory = prefix + username;
-  flakePath = homeDirectory + (if isDarwin
-    then "/Developer/nixfiles"
-    else "/nixfiles");
+  flakePath =
+    homeDirectory
+    + (
+      if isDarwin
+      then "/Developer/nixfiles"
+      else "/nixfiles"
+    );
 
   inherit (flake.inputs) self;
 in {
@@ -29,9 +33,6 @@ in {
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    pkgs.comma
-    pkgs.devenv
-
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
