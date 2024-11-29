@@ -14,7 +14,7 @@ in {
   nixGL = {
     packages = nixgl.packages;
     defaultWrapper = "mesa";
-    installScripts = [ "mesa" ];
+    installScripts = ["mesa"];
   };
 
   # just a temporary test, i use wezterm installed via arch.
