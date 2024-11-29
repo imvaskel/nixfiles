@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: let
-  inherit (flake.inputs) self mac-app-util;
+  inherit (flake.inputs) self;
   cfg = config.dotfiles.type;
 
   packages = [];
@@ -18,7 +18,7 @@
   # kind of cursed to be honest but i love it
   imports = lib.filterAttrs (k: v: k != "default") self.homeModules;
 in {
-  imports = lib.attrValues imports ++ [mac-app-util.homeManagerModules.default];
+  imports = lib.attrValues imports;
 
   home.packages = allPackages;
 

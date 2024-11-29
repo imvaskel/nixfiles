@@ -12,5 +12,5 @@ in {
   xdg.enable = isLinux;
 
   # Sets GOPATH to ~/.local/share/go or ~/Library/Application Support/
-  home.sessionVariables.GOPATH = configDir + "/go" ;
+  home.sessionVariables.GOPATH = configDir + "/go";
 }

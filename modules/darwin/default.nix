@@ -4,8 +4,7 @@
   lib,
   ...
 }: let
-  inherit (flake) inputs;
-  inherit (inputs) self;
+  inherit (flake.inputs) self mac-app-util;
 in {
   imports = lib.attrValues (lib.filterAttrs (k: v: k != "default") self.darwinModules);
 
@@ -20,5 +19,9 @@ in {
   environment.shells = [
     pkgs.zsh
     pkgs.fish
+  ];
+
+  home-manager.sharedModules = [
+    mac-app-util.homeManagerModules.default
   ];
 }
