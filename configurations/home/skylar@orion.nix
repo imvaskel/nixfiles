@@ -1,17 +1,25 @@
 {
   pkgs,
   lib,
+  flake,
+  config,
   ...
 }: let
+  inherit (flake.inputs) self nixgl;
 in {
   imports = [
     ./skylar.nix
   ];
 
-  # Nix on arch kind of sucks due to not playing well with graphical applications.
-  home.packages = lib.mkForce [pkgs.home-manager pkgs.nh pkgs.man];
+  nixGL = {
+    packages = nixgl.packages;
+    defaultWrapper = "mesa";
+    installScripts = [ "mesa" ];
+  };
 
-  programs.fish.functions.starship_transient_prompt_func = lib.mkForce ''
-    starship module character
-  '';
+  # just a temporary test, i use wezterm installed via arch.
+  programs.alacritty = {
+    enable = true;
+    package = config.lib.nixGL.wrap pkgs.alacritty;
+  };
 }

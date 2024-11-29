@@ -1,0 +1,4 @@
+66c66
+<     home-manager switch -b backup --flake $"($data.cleanFlake)#($name)"
+---
+>     home-manager switch --impure -b backup --flake $"($data.cleanFlake)#($name)"
