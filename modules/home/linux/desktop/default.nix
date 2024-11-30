@@ -1,0 +1,6 @@
+{...}: {
+  imports = [
+    ./wezterm
+    #./gtk.nix
+  ];
+}

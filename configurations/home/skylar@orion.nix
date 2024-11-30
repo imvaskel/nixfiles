@@ -9,17 +9,14 @@
 in {
   imports = [
     ./skylar.nix
+    self.homeModules.linux
   ];
+
+  targets.genericLinux.enable = true;
 
   nixGL = {
     packages = nixgl.packages;
     defaultWrapper = "mesa";
     installScripts = ["mesa"];
-  };
-
-  # just a temporary test, i use wezterm installed via arch.
-  programs.alacritty = {
-    enable = true;
-    package = config.lib.nixGL.wrap pkgs.alacritty;
   };
 }

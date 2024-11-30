@@ -4,6 +4,8 @@
   ...
 }: let
   inherit (lib) mkIf;
-in
-  mkIf pkgs.stdenv.isLinux {
-  }
+in {
+  imports = [
+    ./desktop
+  ];
+}

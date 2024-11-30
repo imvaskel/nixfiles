@@ -16,7 +16,7 @@
   allPackages = packages ++ (lib.optionals cfg.graphical graphicalPackages);
 
   # kind of cursed to be honest but i love it
-  imports = lib.filterAttrs (k: v: k != "default") self.homeModules;
+  imports = lib.filterAttrs (k: v: !(builtins.elem k ["default" "darwin" "linux"])) self.homeModules;
 in {
   imports = lib.attrValues imports;
 
