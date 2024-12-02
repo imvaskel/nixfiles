@@ -24,6 +24,4 @@ in {
 
   nix.package = pkgs.lix;
   nixpkgs.config.allowUnfree = true;
-
-  programs.direnv.enable = true;
 }
