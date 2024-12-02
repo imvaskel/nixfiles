@@ -40,7 +40,7 @@ in {
       ll = "${pkgs.eza}/bin/eza --git -lg --icons";
       lla = "${pkgs.eza}/bin/eza --git --lga --icons";
       rebuild-system = "nix run $FLAKE#";
-      rebuild-user = "rebuild-system $USER@";
+      rebuild-user = "rebuild-system $USER@$hostname";
     };
   };
 }
