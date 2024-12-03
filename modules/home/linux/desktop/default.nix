@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    ./wezterm
     #./gtk.nix
     ./gnome
   ];

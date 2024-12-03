@@ -1,7 +1,4 @@
-{
-  flake,
-  ...
-}: let
+{flake, ...}: let
   inherit (flake.inputs) self;
 in {
   imports = [

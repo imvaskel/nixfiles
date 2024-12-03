@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     comma
     devenv
+    uv
   ];
   programs.bash.enable = true;
   programs.direnv = {
