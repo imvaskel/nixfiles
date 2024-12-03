@@ -3,10 +3,11 @@
   flake,
   ...
 }: let
-  inherit (flake.inputs) self;
+  inherit (flake.inputs) self lix-module;
 in {
   imports = [
     self.darwinModules.default
+    lix-module.nixosModules.lixFromNixpkgs
   ];
 
   nixpkgs = {
