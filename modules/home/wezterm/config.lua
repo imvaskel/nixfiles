@@ -11,7 +11,6 @@ config.font = wezterm.font_with_fallback({
 })
 
 -- General Config
-config.use_fancy_tab_bar = false -- Personally don't like the modern one.
 
 config.set_environment_variables = {
 	WEZTERM_LOG = "window::os=off",
@@ -83,5 +82,18 @@ end)
 -- TODO: Change back when wezterm/5990 is resolved
 config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
+
+-- Local config sourcing
+-- the file must be formatted with:
+-- return function(config)
+--  config body here
+-- end
+local local_conf_path = wezterm.config_dir .. "/wezterm.local.lua"
+for _, v in ipairs(wezterm.read_dir(wezterm.config_dir)) do
+	if v == local_conf_path then
+		local local_conf = loadfile(local_conf_path)()
+		local_conf(config)
+	end
+end
 
 return config
