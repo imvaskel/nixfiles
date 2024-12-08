@@ -23,6 +23,8 @@
           sed -i 's|home-manager switch|home-manager switch --impure|' ${prev.meta.mainProgram}
         '';
     });
+
+    packages.nvim-better-diagnostic-virtual-text = pkgs.callPackage ../../packages/better-diagnostic-virtual-text.nix {};
   };
 
   flake = {
