@@ -1,6 +1,12 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  flake,
+  ...
+}: let
+  inherit (flake.inputs) nh;
+in {
   home.packages = with pkgs; [
-    comma
+    nh.packages.${pkgs.system}.default
     devenv
     uv
   ];

@@ -271,6 +271,26 @@
         "type": "github"
       }
     },
+    "nh": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733912267,
+        "narHash": "sha256-I3ubew5jt8YZ27AOtIodRAYo0aew6wxY8UkWCSqz6B4=",
+        "owner": "viperML",
+        "repo": "nh",
+        "rev": "6a69a145b0c7dbd5616bbded512b8bf8b5d2f8a4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "viperML",
+        "repo": "nh",
+        "type": "github"
+      }
+    },
     "nil": {
       "inputs": {
         "flake-utils": [
@@ -2473,6 +2493,7 @@
         "home-manager": "home-manager",
         "lix-module": "lix-module",
         "mac-app-util": "mac-app-util",
+        "nh": "nh",
         "nix-darwin": "nix-darwin",
         "nixgl": "nixgl",
         "nixos-unified": "nixos-unified",

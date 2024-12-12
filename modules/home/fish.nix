@@ -2,9 +2,13 @@
   pkgs,
   lib,
   config,
+  flake,
   ...
 }: let
   cfg = config.dotfiles.type;
+  inherit (flake.inputs) nh;
+  nh-exe = lib.getExe nh.packages.${pkgs.system}.default;
+  nh-command = if pkgs.stdenv.isDarwin then "darwin" else "os";
 in {
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -39,8 +43,8 @@ in {
       la = "${pkgs.eza}/bin/eza -a";
       ll = "${pkgs.eza}/bin/eza --git -lg --icons";
       lla = "${pkgs.eza}/bin/eza --git --lga --icons";
-      rebuild-system = "nix run $FLAKE#";
-      rebuild-user = "rebuild-system $USER@$hostname";
+      rebuild-system = "${nh-exe} ${nh-command} switch";
+      rebuild-user = "${nh-exe} home switch";
     };
   };
 }

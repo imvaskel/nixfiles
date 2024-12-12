@@ -11,6 +11,7 @@
       "tailscale"
       "raycast"
       "discord"
+      "firefox"
       "1password"
     ];
     masApps = {
