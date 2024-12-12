@@ -10,13 +10,14 @@
     mini-comment
     mini-completion
     mini-cursorword
+    mini-files
     mini-git
     mini-hipatterns
-    mini-files
     mini-fuzzy
     mini-jump
     mini-move
-    #mini-pairs - TODO: Why this this overriding <CR>?
+    mini-pick
+    mini-pairs
     mini-notify
     mini-statusline
     mini-surround
@@ -49,6 +50,15 @@ in {
           python.enable = true;
           typst.enable = true;
         };
+        luaConfigRC.mini-files = ''
+          vim.api.nvim_create_autocmd("User", {
+            pattern = "MiniFilesBufferCreate",
+            callback = function(args)
+              local b = args.data.buf_id
+              vim.keymap.set("n", "<CR>", MiniFiles.go_in, { buffer = b })
+            end,
+          })
+        '';
         keymaps = [
           {
             key = "jk";
@@ -72,7 +82,7 @@ in {
           mini-plugins
           // {
             "better-diagnostics-virtual-text" = {
-              package = self.packages.${pkgs.system}.nvim-better-diagnostic-virtual-text;
+              package = self.packages.${pkgs.system}.better-diagnostic-virtual-text;
               setup = ''
                 require("better-diagnostic-virtual-text").setup({})
               '';
@@ -142,12 +152,6 @@ in {
                 })
               '';
             };
-            "mini-pick" = {
-              package = pkgs.vimPlugins.mini-pick;
-              setup = ''
-                require('mini.pick').setup()
-              '';
-              };
             "mini-base16" = {
               package = pkgs.vimPlugins.mini-base16;
               setup = ''
