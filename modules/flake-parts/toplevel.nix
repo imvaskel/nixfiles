@@ -1,7 +1,6 @@
 # Top-level flake glue to get our configuration working
 {
   inputs,
-  self,
   ...
 }: {
   imports = [
@@ -9,22 +8,16 @@
     inputs.nixos-unified.flakeModules.autoWire
   ];
   perSystem = {
-    self',
     pkgs,
+    lib,
     ...
   }: {
     formatter = pkgs.alejandra;
 
-    # TODO: Get this goddamn library to accept the option of passing in ``--impure``.
-    packages.default = self'.packages.activate.overrideAttrs (final: prev: {
-      buildCommand =
-        prev.buildCommand
-        + ''
-          sed -i 's|home-manager switch|home-manager switch --impure|' ${prev.meta.mainProgram}
-        '';
-    });
-
-    packages.nvim-better-diagnostic-virtual-text = pkgs.callPackage ../../packages/better-diagnostic-virtual-text.nix {};
+    packages = lib.packagesFromDirectoryRecursive { 
+        inherit (pkgs) callPackage;
+        directory = ../../packages;
+      };
   };
 
   flake = {
