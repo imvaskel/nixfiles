@@ -8,7 +8,10 @@
   cfg = config.dotfiles.type;
   inherit (flake.inputs) nh;
   nh-exe = lib.getExe nh.packages.${pkgs.system}.default;
-  nh-command = if pkgs.stdenv.isDarwin then "darwin" else "os";
+  nh-command =
+    if pkgs.stdenv.isDarwin
+    then "darwin"
+    else "os";
 in {
   home.sessionVariables = {
     EDITOR = "nvim";

@@ -13,6 +13,7 @@ in {
   ];
 
   targets.genericLinux.enable = true;
+  dotfiles.wrap = true;
 
   nixGL = {
     packages = nixgl.packages;

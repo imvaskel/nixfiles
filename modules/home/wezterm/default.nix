@@ -9,6 +9,7 @@ in
   lib.mkIf cfg.graphical {
     programs.wezterm = {
       enable = true;
+      package = config.dotfiles.wrapProg pkgs.wezterm;
       extraConfig = builtins.readFile ./config.lua;
       colorSchemes."gruvbox_material_medium_dark" = {
         ansi = [
