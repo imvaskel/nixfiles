@@ -2,18 +2,17 @@
   stdenvNoCC,
   fetchFromGitHub,
   gtk-engine-murrine,
-  lib,
   ...
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "gruvbox-material-gtk";
-  version = "2023-08-28"; # it seems that nix versions like this if there is no versioning
+  version = "2024-08-09";
 
   src = fetchFromGitHub {
     owner = "TheGreatMcPain";
     repo = "gruvbox-material-gtk";
-    rev = "a1295d8bcd4dfbd0cd6793d7b1583b442438ed89";
-    sha256 = "sha256-VumO8F4ZrFI6GZU1XXaw4MCnP+Nla1rVS3uuSUzpl9E=";
+    rev = "808959bcfe8b9409b49a7f92052198f0882ae8bc";
+    hash = "sha256-NHjE/HI/BJyjrRfoH9gOKIU8HsUIBPV9vyvuW12D01M=";
   };
 
   propagatedUserEnvPkgs = [

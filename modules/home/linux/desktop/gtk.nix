@@ -1,24 +1,28 @@
 {
-  inputs,
   lib,
   config,
   pkgs,
   ...
 }: let
   inherit (lib) mkIf;
-  self = inputs.self.packages.${pkgs.system};
+  gruvbox-gtk-theme = pkgs.gruvbox-gtk-theme.override {
+    colorVariants = ["dark"];
+    themeVariants = ["pink"];
+    tweakVariants = ["medium" "macos"];
+    iconVariants = ["Dark"];
+  };
   cfg = config.dotfiles.type;
 in {
   config = mkIf cfg.graphical {
     gtk = {
       enable = true;
       theme = {
-        name = "Gruvbox-Material-Dark";
-        package = self.gruvbox-material-gtk;
+        name = "Gruvbox-Pink-Dark-Medium";
+        package = gruvbox-gtk-theme;
       };
       iconTheme = {
-        name = "Gruvbox-Plus-Dark";
-        package = self.gruvbox-plus-icons;
+        name = "Gruvbox-Dark";
+        package = gruvbox-gtk-theme;
       };
       cursorTheme = {
         name = "Capitaine Cursors (Gruvbox)";
