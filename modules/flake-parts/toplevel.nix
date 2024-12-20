@@ -7,14 +7,17 @@
   perSystem = {
     pkgs,
     lib,
+    self',
     ...
   }: {
     formatter = pkgs.alejandra;
 
-    packages = lib.packagesFromDirectoryRecursive {
-      inherit (pkgs) callPackage;
-      directory = ../../packages;
-    };
+    packages =
+      lib.packagesFromDirectoryRecursive {
+        inherit (pkgs) callPackage;
+        directory = ../../packages;
+      }
+      // {nvim = self'.legacyPackages.homeConfigurations.skylar.config.programs.nvf.finalPackage;};
   };
 
   flake = {

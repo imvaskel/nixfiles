@@ -11,8 +11,10 @@
       "tailscale"
       "raycast"
       "discord"
+      "spotify"
       "firefox"
       "1password"
+      "eloston-chromium" # backup for when FF doesn't load stuff
     ];
     masApps = {
       "Amphetamine" = 937984704;
