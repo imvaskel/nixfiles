@@ -40,6 +40,13 @@ in {
       take = ''
         mkdir $argv && cd $argv
       '';
+      # Simple nix run wrapper that runs the package by name with args
+      "," = {
+        body = ''
+          nix run nixpkgs#$argv[1] -- $argv[2..]
+        '';
+        wraps = "nix run";
+      };
     };
     shellAliases = {
       ls = "${pkgs.eza}/bin/eza";
