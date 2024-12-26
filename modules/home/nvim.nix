@@ -50,6 +50,7 @@ in {
           nix.enable = true;
           python.enable = true;
           typst.enable = true;
+          lua.enable = true;
         };
         luaConfigRC.mini-files = ''
           vim.api.nvim_create_autocmd("User", {
@@ -60,6 +61,11 @@ in {
             end,
           })
         '';
+        options = {
+          # Tabs @ 8 spaces is wild
+          tabstop = 4;
+          shiftwidth = 4;
+        };
         keymaps = [
           {
             key = "jk";
@@ -69,9 +75,19 @@ in {
           }
           {
             key = "<Leader>f";
-            mode = "n";
+            mode = [ "n" "v" ];
             silent = true;
             action = "<cmd>lua vim.lsp.buf.format {}<cr>";
+          }
+          {
+            key = "<Leader>y";
+            mode = "v";
+            action = ''"+y'';
+          }
+          {
+            key = "<Leader>p";
+            mode = "n";
+            action = ''"+p'';
           }
         ];
         startPlugins = with pkgs.vimPlugins; [

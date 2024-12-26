@@ -1,3 +1,4 @@
+local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 -- Colors
@@ -27,9 +28,17 @@ end
 config.keys = {
 	{
 		key = "p",
-		mods = "CMD|SHIFT",
+		mods = modifier .. "|SHIFT",
 		action = wezterm.action.ActivateCommandPalette,
 	},
+    {
+        key = 'r',
+        mods = modifier .. '|SHIFT',
+        action = wezterm.action.ActivateKeyTable {
+            name = 'resize_window',
+            one_shot = false,
+        }
+    }
 }
 
 config.mouse_bindings = {
@@ -78,6 +87,71 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		{ Text = title },
 	}
 end)
+
+-- Resize pane  
+local function resize_window(win, pane, x, y)
+    local dimensions = win:get_dimensions()
+    local tab_dim = win:active_tab():get_size()
+    local y_ratio = tab_dim.pixel_height / tab_dim.rows
+    local x_ratio = tab_dim.pixel_width / tab_dim.cols
+
+    local x_add = x_ratio * x
+    local y_add = y_ratio * y
+
+    local new_x = dimensions.pixel_width + x_add
+    local new_y = dimensions.pixel_height + y_add
+
+    win:set_inner_size(new_x, new_y)
+end
+
+wezterm.on("update-status", function(window)
+    local name = window:active_key_table()
+    local text = ""
+    if name then
+        text = "RESIZE  "
+    end
+    window:set_right_status(text)
+end)
+
+config.key_tables = {
+    resize_window = {
+        {
+            key = 'l',
+            action = wezterm.action_callback(function(win, pane)
+                resize_window(win, pane, 1, 0)
+            end)
+        },
+        {
+            key = "h",
+            action = wezterm.action_callback(function(win, pane)
+                resize_window(win, pane, -1, 0)
+            end)
+        },
+        {
+            key = 'j',
+            action = wezterm.action_callback(function(win, pane)
+                resize_window(win, pane, 0, 1)
+            end)
+        },
+        {
+            key = "k",
+            action = wezterm.action_callback(function(win, pane)
+                resize_window(win, pane, 0, -1)
+            end)
+        },
+        -- Cancel by esc or Q
+        { key = "q",      action = "PopKeyTable" },
+        { key = "Escape", action = "PopKeyTable" }
+    }
+}
+
+-- Visual bell
+config.visual_bell = {
+    fade_in_function = 'EaseIn',
+    fade_in_duration_ms = 100,
+    fade_out_function = 'EaseOut',
+    fade_out_duration_ms = 100,
+}
 
 -- TODO: Change back when wezterm/5990 is resolved
 config.front_end = "WebGpu"
