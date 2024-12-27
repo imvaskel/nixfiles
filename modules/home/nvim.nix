@@ -89,6 +89,30 @@ in {
             mode = "n";
             action = ''"+p'';
           }
+          {
+            key = "<Tab>";
+            mode = "i";
+            action = ''[[pumvisible() ? "\<C-n>" : "\<Tab>"]]'';
+            expr = true;
+            lua = true;
+          }
+          {
+            key = "<S-Tab>";
+            mode = "i";
+            action = ''[[pumvisible() ? "\<C-p>" : "\<Tab>"]]'';
+            expr = true;
+            lua = true;
+          }
+          {
+            key = "<C-j>";
+            mode = "i";
+            action = "<C-n>";
+          }
+          {
+            key = "<C-k>";
+            mode = "i";
+            action = "<C-p>";
+          }
         ];
         startPlugins = with pkgs.vimPlugins; [
           "neocord"

@@ -5,6 +5,12 @@
   ...
 }: let
   cfg = config.dotfiles.type;
+  wezterm-types = pkgs.fetchFromGitHub {
+    owner = "gonstoll";
+    repo = "wezterm-types";
+    rev = "45ef8d4d98d27be3ec2e472adde4b31df1d6edcb";
+    hash = "sha256-kQJ7hzMAj7lbM83kZAqcslte1EqSY/2R6oSt5s0K/V0=";
+  };
 in
   lib.mkIf cfg.graphical {
     programs.wezterm = {
@@ -40,6 +46,13 @@ in
         selection_bg = "#D4BE98";
         selection_fg = "#45403d";
       };
+    };
+    home.file = {
+      ".config/wezterm/types" = {
+        source = "${wezterm-types}/types";
+        recursive = true;
+      };
+      ".config/wezterm/.luarc.json".source = "${wezterm-types}/.luarc.json";
     };
 
     programs.fish.shellAliases.ssh = "wezterm ssh";
