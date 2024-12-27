@@ -13,24 +13,19 @@
     then "darwin"
     else "os";
 in {
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
-
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
-      fish_add_path $HOME/.local/bin
-      fish_add_path $HOME/.cargo/bin
-
-      ${lib.optionalString cfg.graphical ''
-        if test $SHLVL -eq 1
-            ${lib.getExe pkgs.krabby} random -i
-        end
-      ''}
+      bind \t complete-and-search
     '';
     functions = {
-      fish_greeting = "";
+      fish_greeting = ''
+        ${lib.optionalString cfg.graphical ''
+          if test $SHLVL -eq 1
+              ${lib.getExe pkgs.krabby} random -i
+          end
+        ''}
+      '';
       edit = {
         body = ''
           $EDITOR $argv

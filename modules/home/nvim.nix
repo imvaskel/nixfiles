@@ -75,7 +75,7 @@ in {
           }
           {
             key = "<Leader>f";
-            mode = [ "n" "v" ];
+            mode = ["n" "v"];
             silent = true;
             action = "<cmd>lua vim.lsp.buf.format {}<cr>";
           }
