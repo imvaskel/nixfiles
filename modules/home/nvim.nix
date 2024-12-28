@@ -8,19 +8,14 @@
   mini-packages = with pkgs.vimPlugins; [
     mini-basics
     mini-comment
-    mini-completion
     mini-cursorword
-    mini-files
     mini-git
     mini-hipatterns
     mini-fuzzy
     mini-jump
     mini-move
-    mini-pick
-    mini-pairs
     mini-notify
     mini-statusline
-    mini-surround
   ];
   sanitize-name = builtins.replaceStrings ["-"] ["."];
   mini-plugins = lib.foldl' (acc: pkg:
@@ -44,6 +39,7 @@ in {
         };
         languages = {
           enableLSP = true;
+          enableTreesitter = true;
           enableFormat = true;
           enableExtraDiagnostics = true;
           rust.enable = true;
@@ -52,19 +48,71 @@ in {
           typst.enable = true;
           lua.enable = true;
         };
-        luaConfigRC.mini-files = ''
-          vim.api.nvim_create_autocmd("User", {
-            pattern = "MiniFilesBufferCreate",
-            callback = function(args)
-              local b = args.data.buf_id
-              vim.keymap.set("n", "<CR>", MiniFiles.go_in, { buffer = b })
-            end,
-          })
-        '';
         options = {
           # Tabs @ 8 spaces is wild
           tabstop = 4;
           shiftwidth = 4;
+        };
+        autocomplete.nvim-cmp.enable = true;
+        presence.neocord.enable = true;
+        # TODO: Broken, find replacement
+        #binds.cheatsheet.enable = true;
+        binds.whichKey.enable = true;
+        telescope.enable = true;
+        autopairs.nvim-autopairs.enable = true;
+        snippets.luasnip.enable = true;
+        git = {
+          enable = true;
+          gitsigns = {
+            enable = true;
+            codeActions.enable = false;
+            mappings = {
+              nextHunk = null;
+              previousHunk = null;
+              stageHunk = null;
+              undoStageHunk = null;
+              resetHunk = null;
+              stageBuffer = null;
+              resetBuffer = null;
+              previewHunk = null;
+              blameLine = null;
+              toggleBlame = null;
+              diffThis = null;
+              diffProject = null;
+              toggleDeleted = null;
+            };
+          };
+        };
+        utility = {
+          surround.enable = true;
+          motion = {
+            hop.enable = true;
+            hop.mappings.hop = null;
+            leap.enable = true;
+            precognition.enable = true;
+          };
+        };
+        theme = {
+          enable = true;
+          name = "base16";
+          base16-colors = {
+            base00 = "#292828";
+            base01 = "#32302f";
+            base02 = "#504945";
+            base03 = "#665c54";
+            base04 = "#bdae93";
+            base05 = "#ddc7a1";
+            base06 = "#ebdbb2";
+            base07 = "#fbf1c7";
+            base08 = "#ea6962";
+            base09 = "#e78a4e";
+            base0A = "#d8a657";
+            base0B = "#a9b665";
+            base0C = "#89b482";
+            base0D = "#7daea3";
+            base0E = "#d3869b";
+            base0F = "#bd6f3e";
+          };
         };
         keymaps = [
           {
@@ -74,48 +122,63 @@ in {
             action = "<ESC>";
           }
           {
-            key = "<Leader>f";
+            key = "<Leader>bf";
             mode = ["n" "v"];
             silent = true;
             action = "<cmd>lua vim.lsp.buf.format {}<cr>";
+            desc = "Format buffer";
           }
           {
             key = "<Leader>y";
             mode = "v";
             action = ''"+y'';
+            desc = "Yoink selection into system keyboard";
           }
           {
             key = "<Leader>p";
             mode = "n";
             action = ''"+p'';
+            desc = "Paste from system clipboard regsiter";
           }
           {
-            key = "<Tab>";
-            mode = "i";
-            action = ''[[pumvisible() ? "\<C-n>" : "\<Tab>"]]'';
-            expr = true;
-            lua = true;
+            key = "<Leader>bf";
+            mode = "n";
+            action = "<cmd>nohlsearch<CR>";
+            desc = "Disable highlight search";
           }
           {
-            key = "<S-Tab>";
-            mode = "i";
-            action = ''[[pumvisible() ? "\<C-p>" : "\<Tab>"]]'';
-            expr = true;
-            lua = true;
+            key = "x";
+            mode = "n";
+            action = ''"_x'';
+            desc = "Delete single character";
           }
           {
-            key = "<C-j>";
-            mode = "i";
-            action = "<C-n>";
+            key = "<Leader>to";
+            mode = "n";
+            action = "<cmd>tabnew<CR>";
           }
           {
-            key = "<C-k>";
-            mode = "i";
-            action = "<C-p>";
+            key = "<Leader>tc";
+            mode = "n";
+            action = "<cmd>tabclose<CR>";
+          }
+          {
+            key = "<Leader>tn";
+            mode = "n";
+            action = "<cmd>tabn<CR>";
+          }
+          {
+            key = "<Leader>tp";
+            mode = "n";
+            action = "<cmd>tabp<CR>";
+          }
+          {
+            key = "<Leader>h";
+            mode = [ "v" "n"];
+            action = "<cmd>HopWord<CR>";
           }
         ];
         startPlugins = with pkgs.vimPlugins; [
-          "neocord"
           "nvim-treesitter"
           typst-vim
         ];
@@ -142,80 +205,6 @@ in {
                         }
                     }
                   }
-              '';
-            };
-            "mini-clue" = {
-              package = pkgs.vimPlugins.mini-clue;
-              setup = ''
-                local miniclue = require('mini.clue')
-                miniclue.setup({
-                  triggers = {
-                    -- Leader triggers
-                    { mode = 'n', keys = '<Leader>' },
-                    { mode = 'x', keys = '<Leader>' },
-
-                    -- Built-in completion
-                    { mode = 'i', keys = '<C-x>' },
-
-                    -- `g` key
-                    { mode = 'n', keys = 'g' },
-                    { mode = 'x', keys = 'g' },
-
-                    -- Marks
-                    { mode = 'n', keys = "'" },
-                    { mode = 'n', keys = '`' },
-                    { mode = 'x', keys = "'" },
-                    { mode = 'x', keys = '`' },
-
-                    -- Registers
-                    { mode = 'n', keys = '"' },
-                    { mode = 'x', keys = '"' },
-                    { mode = 'i', keys = '<C-r>' },
-                    { mode = 'c', keys = '<C-r>' },
-
-                    -- Window commands
-                    { mode = 'n', keys = '<C-w>' },
-
-                    -- `z` key
-                    { mode = 'n', keys = 'z' },
-                    { mode = 'x', keys = 'z' },
-                  },
-
-                  clues = {
-                    -- Enhance this by adding descriptions for <Leader> mapping groups
-                    miniclue.gen_clues.builtin_completion(),
-                    miniclue.gen_clues.g(),
-                    miniclue.gen_clues.marks(),
-                    miniclue.gen_clues.registers(),
-                    miniclue.gen_clues.windows(),
-                    miniclue.gen_clues.z(),
-                  },
-                })
-              '';
-            };
-            "mini-base16" = {
-              package = pkgs.vimPlugins.mini-base16;
-              setup = ''
-                 require("mini.base16").setup({
-                  palette = {
-                     base00 = "#292828",
-                     base01 = "#32302f",
-                     base02 = "#504945",
-                     base03 = "#665c54",
-                     base04 = "#bdae93",
-                     base05 = "#ddc7a1",
-                     base06 = "#ebdbb2",
-                     base07 = "#fbf1c7",
-                     base08 = "#ea6962",
-                     base09 = "#e78a4e",
-                     base0A = "#d8a657",
-                     base0B = "#a9b665",
-                     base0C = "#89b482",
-                     base0D = "#7daea3",
-                     base0E = "#d3869b",
-                     base0F = "#bd6f3e"
-                 }
-                })
               '';
             };
           };
