@@ -26,7 +26,7 @@ in {
       mkdir $WEZTERM_ROOT/types
       ${
       concatStringsSep "\n" to-link
-      }
+    }
 
       ln -s "${wezterm-types}/.luarc.json" "$WEZTERM_ROOT/.luarc.json"
       echo "${''
