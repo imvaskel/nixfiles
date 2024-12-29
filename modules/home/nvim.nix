@@ -12,7 +12,6 @@
     mini-git
     mini-hipatterns
     mini-fuzzy
-    mini-jump
     mini-move
     mini-notify
     mini-statusline
@@ -61,6 +60,7 @@ in {
         telescope.enable = true;
         autopairs.nvim-autopairs.enable = true;
         snippets.luasnip.enable = true;
+        terminal.toggleterm.enable = true;
         git = {
           enable = true;
           gitsigns = {
@@ -89,7 +89,6 @@ in {
             hop.enable = true;
             hop.mappings.hop = null;
             leap.enable = true;
-            precognition.enable = true;
           };
         };
         theme = {
@@ -174,14 +173,31 @@ in {
           }
           {
             key = "<Leader>h";
-            mode = [ "v" "n"];
+            mode = ["v" "n"];
             action = "<cmd>HopWord<CR>";
+          }
+          {
+            key = "<Leader>w";
+            mode = ["v" "n"];
+            action = "<C-w>";
+            desc = "Enter window mode";
+          }
+          {
+            key = "<ESC>";
+            mode = "t";
+            action = "<C-\\><C-n>";
+            desc = "Return to normal mode";
           }
         ];
         startPlugins = with pkgs.vimPlugins; [
           "nvim-treesitter"
           typst-vim
         ];
+        luaConfigRC."which-key-add" = ''
+          require("which-key").add({
+            { "<leader>w", proxy = "<c-w>", group = "windows" }, -- proxy to window mappings
+          })
+        '';
         extraPlugins =
           mini-plugins
           // {
@@ -189,22 +205,6 @@ in {
               package = self.packages.${pkgs.system}.better-diagnostic-virtual-text;
               setup = ''
                 require("better-diagnostic-virtual-text").setup({})
-              '';
-            };
-            "nvim-treesitter-textobjects" = {
-              package = pkgs.vimPlugins.nvim-treesitter-textobjects;
-              after = "nvim-treesitter";
-              setup = ''
-                require("nvim-treesitter.configs").setup {
-                    incremental_selection = {
-                        enable = true,
-                        keymaps = {
-                          init_selection = "\\",
-                          node_incremental = "\\",
-                          node_decremental = "<bs>"
-                        }
-                    }
-                  }
               '';
             };
           };

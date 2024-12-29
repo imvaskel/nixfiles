@@ -236,11 +236,11 @@
     },
     "mnw": {
       "locked": {
-        "lastModified": 1731821965,
-        "narHash": "sha256-QiGi/HBQRnIRGY4gQPuH7T3hr7NznOpEO7qNpF5ldmE=",
+        "lastModified": 1735150973,
+        "narHash": "sha256-OJhcCAoaMMXeD6o4qI/hxBCNELJp4dN8D5LJZc8w8XA=",
         "owner": "Gerg-L",
         "repo": "mnw",
-        "rev": "5fe5c41975ed0af55f55dc37cd28ba906a5d015e",
+        "rev": "40cd0b006cc48dffd0f8698ad7f54cf1d56779a6",
         "type": "github"
       },
       "original": {
@@ -509,6 +509,7 @@
         "plugin-gitsigns-nvim": "plugin-gitsigns-nvim",
         "plugin-glow-nvim": "plugin-glow-nvim",
         "plugin-gruvbox": "plugin-gruvbox",
+        "plugin-haskell-tools-nvim": "plugin-haskell-tools-nvim",
         "plugin-highlight-undo": "plugin-highlight-undo",
         "plugin-hop-nvim": "plugin-hop-nvim",
         "plugin-icon-picker-nvim": "plugin-icon-picker-nvim",
@@ -597,11 +598,11 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1734023787,
-        "narHash": "sha256-0yBJIYIFNqwg2BuL0410jqdEulKcxnd54vINtzL3tAc=",
+        "lastModified": 1735198481,
+        "narHash": "sha256-LXAJuUvv0VhGkZfe1dknY4575i0tMMKIUOhKaj2/FuU=",
         "owner": "NotAShelf",
         "repo": "nvf",
-        "rev": "a0a57757a07941c5523e646f0a97176492704bd4",
+        "rev": "b6a49b299ab64d8e94e0f23eecc5489171a659a8",
         "type": "github"
       },
       "original": {
@@ -1135,6 +1136,22 @@
       "original": {
         "owner": "ellisonleao",
         "repo": "gruvbox.nvim",
+        "type": "github"
+      }
+    },
+    "plugin-haskell-tools-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1734222260,
+        "narHash": "sha256-gZVN9ADPO5wFOaf19FydCneb7aKTT9K1vcLoBURPEjk=",
+        "owner": "mrcjkb",
+        "repo": "haskell-tools.nvim",
+        "rev": "943b77b68a79d3991523ba4d373063c9355c6f55",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrcjkb",
+        "repo": "haskell-tools.nvim",
         "type": "github"
       }
     },
@@ -2167,11 +2184,11 @@
     "plugin-run-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1732918526,
-        "narHash": "sha256-kiszNmZZDXG8tAPMQKuGJDCkqCMzsWT7BkCvkVsH2lA=",
+        "lastModified": 1735130195,
+        "narHash": "sha256-OaOSYyXSNCl9kJJVKhy0L4M06CQFc0NtZ8+AIgKBPik=",
         "owner": "diniamo",
         "repo": "run.nvim",
-        "rev": "d867466e01b8fa4e54a589b9ef446cf43fb966de",
+        "rev": "5888f31c5faf4776e598c0665470f5445510c59e",
         "type": "github"
       },
       "original": {
