@@ -26,12 +26,12 @@ in {
           end
         ''}
       '';
-      edit = {
-        body = ''
-          $EDITOR $argv
-        '';
-        wraps = config.home.sessionVariables.EDITOR;
-      };
+      edit = let
+        fzf = lib.getExe pkgs.fzf;
+        bat = lib.getExe pkgs.bat;
+      in ''
+        ${fzf} --height 40% --preview '${bat} --color=always {}' --bind 'enter:become($EDITOR {})' -q "$argv"
+      '';
       take = ''
         mkdir $argv && cd $argv
       '';
