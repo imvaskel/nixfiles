@@ -80,7 +80,6 @@ in {
   #  /etc/profiles/per-user/skylar/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    FLAKE = flakePath;
     NH_FLAKE = flakePath;
     SSH_AUTH_SOCK = "~/.1password/agent.sock";
   };
