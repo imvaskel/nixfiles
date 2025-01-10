@@ -4,6 +4,16 @@
   ...
 }: let
   inherit (flake.inputs) nh;
+  helix-themes = pkgs.fetchFromGitHub {
+    owner = "CptPotato";
+    repo = "helix-themes";
+    rev = "0ebf77d9e1dc3ee71fbb2a2956810cfc131d0008";
+    hash = "sha256-Cr4NEEFq3XOmOvbsYpRUGkOY1Mq7wIFJzxVhf8e9T0c=";
+  };
+  helix-gruvbox-material = builtins.fromTOML (builtins.concatStringsSep "\n" [
+    (builtins.readFile "${helix-themes}/schemes/gruvbox")
+    (builtins.readFile "${helix-themes}/palettes/gruvbox/material_dark_medium")
+  ]);
 in {
   home = {
     packages = with pkgs; [
@@ -33,17 +43,22 @@ in {
       ];
       enableBashIntegration = false; # I don't use bash but only for scripting
     };
+    helix = {
+      enable = true;
+      themes."gruvbox_material_dark_medium" = helix-gruvbox-material;
+      settings = {
+        theme = "gruvbox_material_dark_medium";
+        editor = {
+          line-number = "relative";
+          lsp.display-messages = true;
+        };
+        keys.insert.j = {
+          k = "normal_mode";
+        };
+      };
+    };
     fzf = {
       enable = true;
-      defaultOptions = [
-        ''--preview-window="border-rounded"''
-        ''--padding="1"''
-        ''--prompt="> "''
-        ''--marker=">"''
-        ''--pointer="◆"''
-        ''--separator="─"''
-        ''--scrollbar="│"''
-      ];
       colors = {
         "fg" = "#d4be98";
         "fg+" = "#d4be98";

@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.lua = {
+  programs.nvf.settings.vim = {
     theme = {
       enable = true;
       name = "base16";

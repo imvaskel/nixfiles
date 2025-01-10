@@ -64,7 +64,7 @@ config.mouse_bindings = {
     },
 }
 
-function tab_title(tab_info)
+local function tab_title(tab_info)
     local title = tab_info.tab_title
     if title and #title > 0 then
         return title
@@ -103,6 +103,9 @@ local function resize_window(win, pane, x, y)
     local new_x = dimensions.pixel_width + x_add
     local new_y = dimensions.pixel_height + y_add
 
+    local x_cells = math.ceil(new_x / x_ratio)
+    local y_cells = math.ceil(new_y / y_ratio)
+    win:set_left_status(x_cells .. 'x' .. y_cells)
     win:set_inner_size(new_x, new_y)
 end
 
@@ -110,10 +113,15 @@ wezterm.on('update-status', function(window)
     local name = window:active_key_table()
     local text = ''
     if name then
-        text = 'RESIZE  '
+        text = name
     end
     window:set_right_status(text)
 end)
+
+local function exit_resize_mode(win, pane)
+    win:set_left_status('')
+    win:perform_action('PopKeyTable', pane)
+end
 
 config.key_tables = {
     resize_window = {
@@ -142,8 +150,8 @@ config.key_tables = {
             end),
         },
         -- Cancel by esc or Q
-        {key = 'q', action = 'PopKeyTable'},
-        {key = 'Escape', action = 'PopKeyTable'},
+        {key = 'q', action = wezterm.action_callback(exit_resize_mode)},
+        {key = 'Escape', action = wezterm.action_callback(exit_resize_mode)},
     },
 }
 
@@ -164,13 +172,15 @@ local wezterm_conf_file = 'wezterm.lua'
 
 -- Check if config path is set (it won't be if you load a file)
 local local_conf_path = wezterm.config_dir
-if local_conf_path == '' then
+if local_conf_path ~= '' then
     -- Grab all lua files out of the config path
     for _, v in ipairs(wezterm.glob(local_conf_path .. '/*.lua')) do
         -- Make sure we don't circle import the default config
         if string.sub(v, - #wezterm_conf_file) ~= wezterm_conf_file then
             -- Strip off the ~/whatever and .lua extension and import the file
-            require(string.sub(v, #local_conf_path + 2, #v - 4))
+            local name = string.sub(v, #local_conf_path + 2, #v - 4)
+            wezterm.log_info('requiring ' .. name)
+            require(name)
         end
     end
 end

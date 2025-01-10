@@ -1,8 +1,7 @@
 {
-  programs.nvf.settings.lua = {
+  programs.nvf.settings.vim = {
     maps.insert = {
       "jk" = {
-        mode = "i";
         silent = true;
         action = "<ESC>";
       };

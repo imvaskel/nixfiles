@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.lua = {
+  programs.nvf.settings.vim = {
     maps.visual = {
       "<Leader>bf" = {
         silent = true;

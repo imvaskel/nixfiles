@@ -1,9 +1,9 @@
 {
-  inputs,
+  flake,
   pkgs,
   ...
 }: let
-  inherit (inputs) self;
+  inherit (flake.inputs) self;
 in {
   programs.nvf.settings.vim = {
     startPlugins = with pkgs.vimPlugins; [

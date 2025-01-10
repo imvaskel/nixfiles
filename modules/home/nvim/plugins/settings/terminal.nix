@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.lua = {
+  programs.nvf.settings.vim = {
     terminal.toggleterm.enable = true;
   };
 }

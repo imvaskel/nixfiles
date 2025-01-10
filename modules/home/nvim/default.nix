@@ -1,7 +1,4 @@
-{
-  lib,
-  ...
-}: let
+{lib, ...}: let
   inherit (lib.filesystem) listFilesRecursive;
   inherit (lib.strings) hasSuffix;
   inherit (builtins) filter;
@@ -10,5 +7,5 @@
 
   imports = filter (p: p != ./default.nix && (isNixFile p)) (listFilesRecursive ./.);
 in {
-    imports = imports;
+  imports = imports;
 }

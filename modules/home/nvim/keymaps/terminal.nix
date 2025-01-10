@@ -1,8 +1,7 @@
 {
-  programs.nvf.settings.lua = {
+  programs.nvf.settings.vim = {
     maps.terminal = {
       "<ESC>" = {
-        mode = "t";
         action = "<C-\\><C-n>";
         desc = "Return to normal mode";
       };

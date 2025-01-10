@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.lua = {
-    telescope.enable = true; 
+  programs.nvf.settings.vim = {
+    telescope.enable = true;
   };
 }
