@@ -107,23 +107,7 @@
       "inputs": {
         "devenv": "devenv",
         "nixpkgs": "nixpkgs",
-        "pre-commit-hooks": "pre-commit-hooks",
-        "wezterm-types": "wezterm-types"
-      }
-    },
-    "wezterm-types": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1731871054,
-        "owner": "gonstoll",
-        "repo": "wezterm-types",
-        "rev": "45ef8d4d98d27be3ec2e472adde4b31df1d6edcb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gonstoll",
-        "repo": "wezterm-types",
-        "type": "github"
+        "pre-commit-hooks": "pre-commit-hooks"
       }
     }
   },

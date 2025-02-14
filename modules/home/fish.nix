@@ -16,7 +16,7 @@ in {
       fish_greeting = ''
         ${lib.optionalString cfg.graphical ''
           if test $SHLVL -eq 1
-              ${lib.getExe pkgs.krabby} random -i
+              ${lib.getExe pkgs.cbonsai} -p
           end
         ''}
       '';
@@ -53,6 +53,28 @@ in {
         '';
         wraps = "nix shell";
       };
+      "paste" = {
+        body = ''
+          curl --data-binary @$argv https://mystb.in/api/paste | jq -r '.id' | xargs -0 printf 'https://mystb.in/%s'
+        '';
+      };
+      "temp" = {
+        body = ''
+          set -x _TMP_DIR $(mktemp -d)
+          pushd $_TMP_DIR > /dev/null
+
+          echo -n "Creating a temporary shell at "
+          set_color blue; echo -n "$_TMP_DIR "; set_color normal
+          echo -n "with shell "
+          echo "$SHELL"
+          set_color red; echo "This directory will be deleted after the shell is finished."; set_color normal
+
+          "$SHELL"
+          popd > /dev/null
+          rm -r $_TMP_DIR
+        '';
+        description = "Makes a temporary directory and spawns a subshell in it, then cleans up after.";
+      };
     };
     shellAliases = let
       inherit (flake.inputs) nh;
@@ -64,6 +86,8 @@ in {
     in {
       rebuild-system = "${nh-exe} ${nh-command} switch";
       rebuild-user = "${nh-exe} home switch";
+      ssh = "${lib.getExe config.programs.kitty.package} +kitten ssh";
+      "run" = ",";
     };
   };
 }
