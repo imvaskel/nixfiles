@@ -29,7 +29,10 @@ in {
     inherit username homeDirectory;
   };
   news.display = "silent";
-  dotfiles.type.graphical = true;
+  dotfiles = {
+    type.graphical = true;
+    inherit flakePath;
+  };
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -80,7 +83,7 @@ in {
   #  /etc/profiles/per-user/skylar/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    NH_FLAKE = flakePath;
+    NH_FLAKE = "nixfiles";
     SSH_AUTH_SOCK = "~/.1password/agent.sock";
   };
 

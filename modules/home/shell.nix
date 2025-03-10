@@ -3,18 +3,23 @@
   flake,
   ...
 }: let
-  inherit (flake.inputs) nh;
+  inherit (flake.inputs) nh self;
+  inherit (self.packages.${pkgs.system}) nvim;
 in {
   home = {
     packages = with pkgs; [
       nh.packages.${pkgs.system}.default
       devenv
       uv
+      nvim
     ];
     sessionPath = [
       "$HOME/.local/bin"
       "$HOME/.cargo/bin"
     ];
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
 
   programs = {

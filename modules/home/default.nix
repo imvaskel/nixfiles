@@ -5,13 +5,8 @@
   pkgs,
   ...
 }: let
-  inherit (flake.inputs) self nixpkgs nixpkgs-darwin;
+  inherit (flake.inputs) self ;
   cfg = config.dotfiles.type;
-
-  nixpkg =
-    if pkgs.stdenv.isDarwin
-    then nixpkgs-darwin
-    else nixpkgs;
 
   packages = [];
   graphicalPackages = with pkgs; [

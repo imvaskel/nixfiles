@@ -11,14 +11,14 @@
       # Kinda cursed, but it's w/e
       format =
         (builtins.replaceStrings ["\n"] [""] ''
-          [](bg: yellow)
+          [](fg:blue)
           $username$hostname
-          [](fg:yellow bg:white)
+          [](fg:blue bg:pink)
           $directory
-          [](fg:white bg:white)
+          [](fg:pink bg:white)
           $git_branch$git_commit$git_state$git_status
           [ ](bg:white)
-          [](fg:white bg:purple)
+          [](fg:white bg:pink)
           $c
           $cmake
           $dart
@@ -37,43 +37,51 @@
           $rust
           $swift
           $package
-          [ ](bg:purple)
-          [](fg:purple bg:purple)
+          [ ](bg:pink)
+          [](fg:pink bg:pink)
           $cmd_duration
-          [ ](bg:purple)
+          [ ](bg:pink)
           $nix_shell
-          [](bg:#purple)
-          [](fg:purple bg:purple)
+          [](bg:#pink)
+          [](fg:pink bg:blue)
           $time
-          [](fg:purple)
+          [](fg:blue)
         '')
         + "\n$character";
 
-      palette = "pastel-enby";
+      palette = "trans";
 
-      palettes.pastel-enby = {
-        yellow = "#E1C269";
-        white = "#DAD1D2";
-        purple = "#A25BB1";
-        foreground = "#000000";
+      palettes = {
+        trans = {
+          blue = "#5BCEFA";
+          pink = "#F5A9B8";
+          foreground = "#000000";
+          white = "#FFFFFF";
+        };
+        pastel-enby = {
+          yellow = "#E1C269";
+          white = "#DAD1D2";
+          purple = "#A25BB1";
+          foreground = "#000000";
+        };
       };
 
       username = {
-        style_user = "bg:yellow fg:foreground";
-        style_root = "bg:yellow fg:foreground";
+        style_user = "bg:blue fg:foreground";
+        style_root = "bg:blue fg:foreground";
         show_always = true;
         format = "[$user ]($style)";
       };
 
       hostname = {
-        style = "bg:yellow fg:foreground";
+        style = "bg:blue fg:foreground";
         format = "[\uf178  ssh: $hostname ]($style)";
       };
 
       directory = {
         truncation_symbol = "…/";
         truncation_length = 5;
-        style = "bg:white fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $path ]($style)";
       };
       git_branch = {
@@ -99,114 +107,114 @@
       };
 
       c = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version(-$name))]($style)";
       };
 
       cmake = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       dart = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       deno = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       dotnet = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)( 🎯$tfm)]($style)";
       };
 
       elixir = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version \\(OTP $otp_version\\))]($style)";
       };
 
       erlang = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       golang = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       haskell = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       java = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       kotlin = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       lua = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       nodejs = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       python = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ \${symbol}\${pyenv_prefix}(\${version} )(\\($virtualenv\\))]($style)";
       };
 
       ruby = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       rust = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       swift = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       package = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $symbol($version)]($style)";
       };
 
       cmd_duration = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[ $duration]($style)";
       };
 
       time = {
         disabled = false;
         time_format = "%I:%M %P";
-        style = "bg:purple fg:foreground";
+        style = "bg:blue fg:foreground";
         format = "[ ♥ $time ]($style)";
       };
 
       nix_shell = {
-        style = "bg:purple fg:foreground";
+        style = "bg:pink fg:foreground";
         format = "[via $symbol]($style)";
       };
 
       character = {
-        success_symbol = " [❯](fg:purple) ";
+        success_symbol = " [❯](fg:white) ";
         error_symbol = " [✘](bold red) ";
       };
     };

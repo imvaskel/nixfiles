@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim = {
+  vim = {
     git = {
       enable = true;
       gitsigns = {

@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim = {
+  vim = {
     theme = {
       enable = true;
       name = "base16";

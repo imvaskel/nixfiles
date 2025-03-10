@@ -14,6 +14,7 @@ in {
       macos = mkEnableOption "";
       linux = mkEnableOption "";
     };
+    flakePath = mkOption {};
     wrap = mkEnableOption "Whether to wrap programs with nixGL.";
     wrapProg = mkOption {
       internal = true;

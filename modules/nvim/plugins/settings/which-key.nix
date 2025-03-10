@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim = {
+  vim = {
     binds.whichKey.enable = true;
     luaConfigRC."which-key-add" = ''
       require("which-key").add({

@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim = {
+  vim = {
     maps.normal = {
       "<Leader>p" = {
         action = ''"*p'';

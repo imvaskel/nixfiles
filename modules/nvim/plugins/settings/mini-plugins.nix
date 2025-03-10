@@ -26,7 +26,7 @@
     }) {}
   mini-packages;
 in {
-  programs.nvf.settings.vim = {
+  vim = {
     luaConfigRC.mini-files = ''
       vim.api.nvim_create_autocmd("User", {
         pattern = "MiniFilesBufferCreate",

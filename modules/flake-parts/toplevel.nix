@@ -9,15 +9,26 @@
     lib,
     self',
     ...
-  }: {
+  }: let
+    inherit (inputs) nvf;
+    nvfCfg = nvf.lib.neovimConfiguration {
+      extraSpecialArgs = {
+        inherit self';
+      };
+      inherit pkgs;
+      modules = [../nvim];
+    };
+  in {
     formatter = pkgs.alejandra;
 
     packages =
-      lib.packagesFromDirectoryRecursive {
+      {
+        nvim = nvfCfg.neovim;
+      }
+      // (lib.packagesFromDirectoryRecursive {
         inherit (pkgs) callPackage;
         directory = ../../packages;
-      }
-      // {nvim = self'.legacyPackages.homeConfigurations.skylar.config.programs.nvf.finalPackage;};
+      });
   };
 
   flake = {

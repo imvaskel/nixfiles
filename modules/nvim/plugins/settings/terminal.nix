@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim = {
+  vim = {
     terminal.toggleterm.enable = true;
   };
 }

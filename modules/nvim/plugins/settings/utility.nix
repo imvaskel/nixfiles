@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim = {
+  vim = {
     utility = {
       surround.enable = true;
       motion = {

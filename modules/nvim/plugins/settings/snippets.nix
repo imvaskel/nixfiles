@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim = {
+  vim = {
     snippets.luasnip.enable = true;
   };
 }

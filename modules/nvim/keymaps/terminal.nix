@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim = {
+  vim = {
     maps.terminal = {
       "<ESC>" = {
         action = "<C-\\><C-n>";

@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim = {
+  vim = {
     maps.insert = {
       "jk" = {
         silent = true;
