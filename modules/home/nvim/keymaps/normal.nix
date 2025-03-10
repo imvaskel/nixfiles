@@ -2,7 +2,7 @@
   programs.nvf.settings.vim = {
     maps.normal = {
       "<Leader>p" = {
-        action = ''"+p'';
+        action = ''"*p'';
         desc = "Paste from system clipboard regsiter";
       };
       "<Leader>bf" = {

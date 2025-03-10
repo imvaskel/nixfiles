@@ -8,8 +8,13 @@
       };
 
       "<Leader>y" = {
-        action = ''"+y'';
+        action = ''"*y'';
         desc = "Yoink selection into system keyboard";
+      };
+
+      "x" = {
+        action = ''"_x'';
+        desc = "Delete single character";
       };
 
       "<Leader>w" = {

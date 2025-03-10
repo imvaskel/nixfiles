@@ -13,6 +13,7 @@
       python.enable = true;
       typst.enable = true;
       lua.enable = true;
+      svelte.enable = true;
     };
   };
 }

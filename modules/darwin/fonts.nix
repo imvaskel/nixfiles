@@ -1,5 +1,7 @@
 {pkgs, ...}: {
-  fonts.packages = [
-    pkgs.maple-mono-NF
+  fonts.packages = with pkgs; [
+    maple-mono-NF
+    atkinson-hyperlegible
+    atkinson-monolegible
   ];
 }

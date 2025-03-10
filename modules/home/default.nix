@@ -5,8 +5,13 @@
   pkgs,
   ...
 }: let
-  inherit (flake.inputs) self;
+  inherit (flake.inputs) self nixpkgs nixpkgs-darwin;
   cfg = config.dotfiles.type;
+
+  nixpkg =
+    if pkgs.stdenv.isDarwin
+    then nixpkgs-darwin
+    else nixpkgs;
 
   packages = [];
   graphicalPackages = with pkgs; [
@@ -16,12 +21,14 @@
   allPackages = packages ++ (lib.optionals cfg.graphical graphicalPackages);
 
   # kind of cursed to be honest but i love it
-  imports = lib.filterAttrs (k: v: !(builtins.elem k ["default" "darwin" "linux"])) self.homeModules;
+  imports = lib.filterAttrs (k: _: !(builtins.elem k ["default" "darwin" "linux"])) self.homeModules;
 in {
   imports = lib.attrValues imports;
 
   home.packages = allPackages;
 
-  nix.package = pkgs.lix;
+  nix = {
+    package = pkgs.lix;
+  };
   nixpkgs.config.allowUnfree = true;
 }

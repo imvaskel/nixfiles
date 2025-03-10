@@ -9,9 +9,21 @@
 in {
   programs.fish = {
     enable = true;
+    # Changes tab to automatically toggle search
     interactiveShellInit = ''
-      bind \t complete-and-search
+      set -U FZF_LEGACY_KEYBINDINGS 0
+      bind \t complete pager-toggle-search
     '';
+    plugins = [
+      {
+        name = "fzf";
+        src = pkgs.fishPlugins.fzf;
+      }
+      {
+        name = "pisces";
+        src = pkgs.fishPlugins.pisces;
+      }
+    ];
     functions = {
       fish_greeting = ''
         ${lib.optionalString cfg.graphical ''
@@ -88,6 +100,7 @@ in {
       rebuild-user = "${nh-exe} home switch";
       ssh = "${lib.getExe config.programs.kitty.package} +kitten ssh";
       "run" = ",";
+      update-system = "cd $NH_FLAKE && nix flake update && rebuild-system && rebuild-user";
     };
   };
 }
