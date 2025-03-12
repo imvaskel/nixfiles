@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: let
-  inherit (flake.inputs) self ;
+  inherit (flake.inputs) self;
   cfg = config.dotfiles.type;
 
   packages = [];

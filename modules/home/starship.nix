@@ -49,7 +49,7 @@
         '')
         + "\n$character";
 
-      palette = "trans";
+      palette = "trans-gruvbox";
 
       palettes = {
         trans = {
@@ -63,6 +63,13 @@
           white = "#DAD1D2";
           purple = "#A25BB1";
           foreground = "#000000";
+        };
+        trans-gruvbox = {
+          blue = "#7DAEA3";
+          foreground = "#000000";
+          pink = "#d3869b";
+          white = "#ddc7a1";
+          red = "#ea6962";
         };
       };
 

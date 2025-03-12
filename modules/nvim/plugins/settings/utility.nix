@@ -8,5 +8,8 @@
         leap.enable = true;
       };
     };
+    visuals = {
+      nvim-cursorline.enable = true;
+    };
   };
 }
