@@ -8,7 +8,7 @@
           git
           nil
           statix
-          alejandra
+          nixfmt-rfc-style
         ];
       };
     };
