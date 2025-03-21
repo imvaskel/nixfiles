@@ -2,10 +2,12 @@
   pkgs,
   flake,
   ...
-}: let
+}:
+let
   inherit (flake.inputs) nh self;
   inherit (self.packages.${pkgs.system}) nvim;
-in {
+in
+{
   home = {
     packages = with pkgs; [
       nh.packages.${pkgs.system}.default
@@ -59,7 +61,7 @@ in {
     };
     zoxide = {
       enable = true;
-      options = ["--cmd cd"];
+      options = [ "--cmd cd" ];
     };
     bat = {
       enable = true;

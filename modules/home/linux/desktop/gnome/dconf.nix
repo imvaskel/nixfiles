@@ -1,10 +1,20 @@
 # Generated via dconf2nix: https://github.com/nix-commmunity/dconf2nix
-{lib, ...}:
-with lib.hm.gvariant; {
+{ lib, ... }:
+with lib.hm.gvariant;
+{
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
-      sources = [(mkTuple ["xkb" "us"])];
-      xkb-options = ["caps:hyper" "compose:ralt" "lv3:rwin_switch"];
+      sources = [
+        (mkTuple [
+          "xkb"
+          "us"
+        ])
+      ];
+      xkb-options = [
+        "caps:hyper"
+        "compose:ralt"
+        "lv3:rwin_switch"
+      ];
     };
 
     "org/gnome/desktop/interface" = {
@@ -24,7 +34,11 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/desktop/search-providers" = {
-      sort-order = ["org.gnome.Contacts.desktop" "org.gnome.Documents.desktop" "org.gnome.Nautilus.desktop"];
+      sort-order = [
+        "org.gnome.Contacts.desktop"
+        "org.gnome.Documents.desktop"
+        "org.gnome.Nautilus.desktop"
+      ];
     };
 
     "org/gnome/desktop/session" = {
@@ -37,8 +51,8 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      activate-window-menu = [];
-      close = ["<Alt>q"];
+      activate-window-menu = [ ];
+      close = [ "<Alt>q" ];
     };
 
     "org/gnome/desktop/wm/preferences" = {
@@ -57,12 +71,21 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/nautilus/window-state" = {
-      initial-size = mkTuple [890 550];
-      initial-size-file-chooser = mkTuple [890 550];
+      initial-size = mkTuple [
+        890
+        550
+      ];
+      initial-size-file-chooser = mkTuple [
+        890
+        550
+      ];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"];
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+      ];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -79,9 +102,27 @@ with lib.hm.gvariant; {
 
     "org/gnome/shell" = {
       disable-user-extensions = false;
-      disabled-extensions = ["system-monitor@gnome-shell-extensions.gcampax.github.com" "window-list@gnome-shell-extensions.gcampax.github.com"];
-      enabled-extensions = ["user-theme@gnome-shell-extensions.gcampax.github.com" "appindicatorsupport@rgcjonas.gmail.com" "dash-to-dock@micxgx.gmail.com" "search-light@icedman.github.com" "just-perfection-desktop@just-perfection" "clipboard-indicator@tudmotu.com" "caffeine@patapon.info"];
-      favorite-apps = ["org.gnome.Nautilus.desktop" "firefox-nightly.desktop" "vesktop.desktop" "org.wezfurlong.wezterm.desktop" "com.spotify.Client.desktop" "steam.desktop"];
+      disabled-extensions = [
+        "system-monitor@gnome-shell-extensions.gcampax.github.com"
+        "window-list@gnome-shell-extensions.gcampax.github.com"
+      ];
+      enabled-extensions = [
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "appindicatorsupport@rgcjonas.gmail.com"
+        "dash-to-dock@micxgx.gmail.com"
+        "search-light@icedman.github.com"
+        "just-perfection-desktop@just-perfection"
+        "clipboard-indicator@tudmotu.com"
+        "caffeine@patapon.info"
+      ];
+      favorite-apps = [
+        "org.gnome.Nautilus.desktop"
+        "firefox-nightly.desktop"
+        "vesktop.desktop"
+        "org.wezfurlong.wezterm.desktop"
+        "com.spotify.Client.desktop"
+        "steam.desktop"
+      ];
     };
 
     "org/gnome/shell/extensions/caffeine" = {
@@ -91,7 +132,7 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/shell/extensions/clipboard-indicator" = {
-      toggle-menu = ["<Super>v"];
+      toggle-menu = [ "<Super>v" ];
     };
 
     "org/gnome/shell/extensions/dash-to-dock" = {
@@ -122,7 +163,12 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/shell/extensions/search-light" = {
-      background-color = mkTuple [(mkDouble "0.19607843458652496") (mkDouble "0.1882352977991104") (mkDouble "0.18431372940540314") (mkDouble "1.0")];
+      background-color = mkTuple [
+        (mkDouble "0.19607843458652496")
+        (mkDouble "0.1882352977991104")
+        (mkDouble "0.18431372940540314")
+        (mkDouble "1.0")
+      ];
       blur-brightness = mkDouble "0.6";
       blur-sigma = mkDouble "30.0";
       currency-converter = true;
@@ -131,7 +177,7 @@ with lib.hm.gvariant; {
       preferred-monitor = 0;
       scale-height = mkDouble "0.1";
       scale-width = mkDouble "0.1";
-      shortcut-search = ["<Alt>space"];
+      shortcut-search = [ "<Alt>space" ];
       show-panel-icon = false;
       unit-converter = true;
     };
@@ -141,11 +187,32 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/shell/keybindings" = {
-      toggle-message-tray = [];
+      toggle-message-tray = [ ];
     };
 
     "org/gnome/shell/world-clocks" = {
-      locations = [(mkVariant (mkTuple [(mkUint32 2) (mkVariant (mkTuple ["Orlando" "KORL" true [(mkTuple [(mkDouble "0.4982284776050916") (mkDouble "-1.4195780857022569")])] [(mkTuple [(mkDouble "0.49808790878713594") (mkDouble "-1.4203356284107929")])]]))]))];
+      locations = [
+        (mkVariant (mkTuple [
+          (mkUint32 2)
+          (mkVariant (mkTuple [
+            "Orlando"
+            "KORL"
+            true
+            [
+              (mkTuple [
+                (mkDouble "0.4982284776050916")
+                (mkDouble "-1.4195780857022569")
+              ])
+            ]
+            [
+              (mkTuple [
+                (mkDouble "0.49808790878713594")
+                (mkDouble "-1.4203356284107929")
+              ])
+            ]
+          ]))
+        ]))
+      ];
     };
 
     "org/gnome/tweaks" = {
@@ -153,8 +220,33 @@ with lib.hm.gvariant; {
     };
 
     "org/gtk/gtk4/settings/color-chooser" = {
-      custom-colors = [(mkTuple [(mkDouble "0.19607843458652496") (mkDouble "0.1882352977991104") (mkDouble "0.18431372940540314") (mkDouble "1.0")]) (mkTuple [(mkDouble "0.19607843458652496") (mkDouble "0.1882352977991104") (mkDouble "0.18431372940540314") (mkDouble "0.25")]) (mkTuple [(mkDouble "0.0") (mkDouble "0.0") (mkDouble "0.0") (mkDouble "0.25")])];
-      selected-color = mkTuple [true (mkDouble "0.19607843458652496") (mkDouble "0.1882352977991104") (mkDouble "0.18431372940540314") (mkDouble "1.0")];
+      custom-colors = [
+        (mkTuple [
+          (mkDouble "0.19607843458652496")
+          (mkDouble "0.1882352977991104")
+          (mkDouble "0.18431372940540314")
+          (mkDouble "1.0")
+        ])
+        (mkTuple [
+          (mkDouble "0.19607843458652496")
+          (mkDouble "0.1882352977991104")
+          (mkDouble "0.18431372940540314")
+          (mkDouble "0.25")
+        ])
+        (mkTuple [
+          (mkDouble "0.0")
+          (mkDouble "0.0")
+          (mkDouble "0.0")
+          (mkDouble "0.25")
+        ])
+      ];
+      selected-color = mkTuple [
+        true
+        (mkDouble "0.19607843458652496")
+        (mkDouble "0.1882352977991104")
+        (mkDouble "0.18431372940540314")
+        (mkDouble "1.0")
+      ];
     };
 
     "org/gtk/gtk4/settings/file-chooser" = {
@@ -173,8 +265,14 @@ with lib.hm.gvariant; {
       sort-directories-first = false;
       sort-order = "descending";
       type-format = "category";
-      window-position = mkTuple [102 102];
-      window-size = mkTuple [1203 902];
+      window-position = mkTuple [
+        102
+        102
+      ];
+      window-size = mkTuple [
+        1203
+        902
+      ];
     };
   };
 }

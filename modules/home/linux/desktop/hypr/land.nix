@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   mainMod = "SUPER";
   colors = {
     bg = "rgb(282828)";
@@ -25,7 +26,8 @@
         hyprctl dispatch exec vesktop
     fi
   '';
-in {
+in
+{
   config = mkIf cfg.graphical {
     home.packages = [
       pkgs.nixgl.nixGLMesa
@@ -34,7 +36,7 @@ in {
 
     wayland.windowManager.hyprland = {
       enable = true;
-      systemd.variables = ["--all"];
+      systemd.variables = [ "--all" ];
       settings = {
         "$terminal" = "kitty";
         "$fieManager" = "thunar";

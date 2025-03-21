@@ -2,7 +2,8 @@
   pkgs,
   osConfig,
   ...
-}: {
+}:
+{
   xdg.configFile."nushell/gruvbox.nu".source = ./gruvbox.nu;
 
   programs.nushell = {

@@ -3,16 +3,21 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
   gruvbox-gtk-theme = pkgs.gruvbox-gtk-theme.override {
-    colorVariants = ["dark"];
-    themeVariants = ["pink"];
-    tweakVariants = ["medium" "macos"];
-    iconVariants = ["Dark"];
+    colorVariants = [ "dark" ];
+    themeVariants = [ "pink" ];
+    tweakVariants = [
+      "medium"
+      "macos"
+    ];
+    iconVariants = [ "Dark" ];
   };
   cfg = config.dotfiles.type;
-in {
+in
+{
   config = mkIf cfg.graphical {
     gtk = {
       enable = true;

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   vim = {
     mini = {
       basics.enable = true;

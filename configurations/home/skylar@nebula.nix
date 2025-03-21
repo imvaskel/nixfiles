@@ -1,6 +1,8 @@
-{flake, ...}: let
+{ flake, ... }:
+let
   inherit (flake.inputs) self mac-app-util;
-in {
+in
+{
   imports = [
     ./skylar.nix
     self.homeModules.darwin

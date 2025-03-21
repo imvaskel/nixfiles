@@ -1,10 +1,12 @@
-{lib, ...}: let
+{ lib, ... }:
+let
   inherit (lib.generators) mkLuaInline;
-  
-in {
+
+in
+{
   vim.autocmds = [
     {
-      event = ["LspAttach"];
+      event = [ "LspAttach" ];
       #group = "UserLspConfig";
       callback = mkLuaInline ''
         function(args)

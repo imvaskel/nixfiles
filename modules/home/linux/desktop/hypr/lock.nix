@@ -2,10 +2,12 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.dotfiles.type;
   inherit (lib) mkIf;
-in {
+in
+{
   config.programs.hyprlock = mkIf cfg.graphical {
     enable = true;
     settings = {

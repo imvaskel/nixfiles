@@ -2,24 +2,17 @@
   pkgs,
   flake,
   ...
-}: let
+}:
+let
   inherit (pkgs.stdenv) isDarwin;
   username = "skylar";
-  prefix =
-    if isDarwin
-    then "/Users/"
-    else "/home/";
+  prefix = if isDarwin then "/Users/" else "/home/";
   homeDirectory = prefix + username;
-  flakePath =
-    homeDirectory
-    + (
-      if isDarwin
-      then "/Developer/nixfiles"
-      else "/nixfiles"
-    );
+  flakePath = homeDirectory + (if isDarwin then "/Developer/nixfiles" else "/nixfiles");
 
   inherit (flake.inputs) self;
-in {
+in
+{
   imports = [
     self.homeModules.default
   ];

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   system.defaults = {
     dock = {
       tilesize = 52;

@@ -1,6 +1,8 @@
-{...}: let
+{ ... }:
+let
   configDir = "~/.config/git";
-in {
+in
+{
   programs = {
     lazygit.enable = true;
     git = {

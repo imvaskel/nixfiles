@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   programs.kitty = {
     enable = true;
     themeFile = "GruvboxMaterialDarkMedium";

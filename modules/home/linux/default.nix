@@ -2,9 +2,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
-in {
+in
+{
   imports = [
     ./desktop
   ];

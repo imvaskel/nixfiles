@@ -3,13 +3,15 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   #hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
   hyprlock = "/usr/bin/hyprlock"; # TODO: Debug why hyprlock pam fails.
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   cfg = config.dotfiles.type;
   inherit (lib) mkIf;
-in {
+in
+{
   config.services.hypridle = mkIf cfg.graphical {
     enable = true;
     settings = {

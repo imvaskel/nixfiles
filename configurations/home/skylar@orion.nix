@@ -4,9 +4,11 @@
   flake,
   config,
   ...
-}: let
+}:
+let
   inherit (flake.inputs) self nixgl;
-in {
+in
+{
   imports = [
     ./skylar.nix
     self.homeModules.linux
@@ -18,6 +20,6 @@ in {
   nixGL = {
     packages = nixgl.packages;
     defaultWrapper = "mesa";
-    installScripts = ["mesa"];
+    installScripts = [ "mesa" ];
   };
 }

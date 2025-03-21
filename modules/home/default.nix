@@ -4,11 +4,12 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (flake.inputs) self;
   cfg = config.dotfiles.type;
 
-  packages = [];
+  packages = [ ];
   graphicalPackages = with pkgs; [
     vscode
   ];
@@ -16,8 +17,16 @@
   allPackages = packages ++ (lib.optionals cfg.graphical graphicalPackages);
 
   # kind of cursed to be honest but i love it
-  imports = lib.filterAttrs (k: _: !(builtins.elem k ["default" "darwin" "linux"])) self.homeModules;
-in {
+  imports = lib.filterAttrs (
+    k: _:
+    !(builtins.elem k [
+      "default"
+      "darwin"
+      "linux"
+    ])
+  ) self.homeModules;
+in
+{
   imports = lib.attrValues imports;
 
   home.packages = allPackages;

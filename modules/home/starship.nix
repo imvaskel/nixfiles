@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # Set up transient prompt
   programs.fish.functions.starship_transient_prompt_func = ''
     ${pkgs.starship}/bin/starship module character
@@ -10,7 +11,7 @@
     settings = {
       # Kinda cursed, but it's w/e
       format =
-        (builtins.replaceStrings ["\n"] [""] ''
+        (builtins.replaceStrings [ "\n" ] [ "" ] ''
           [](fg:blue)
           $username$hostname
           [](fg:blue bg:pink)

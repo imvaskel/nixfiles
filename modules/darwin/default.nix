@@ -3,9 +3,11 @@
   flake,
   lib,
   ...
-}: let
+}:
+let
   inherit (flake.inputs) self mac-app-util nixpkgs-unstable;
-in {
+in
+{
   imports = lib.attrValues (lib.filterAttrs (k: _: k != "default") self.darwinModules);
 
   services.nix-daemon.enable = true;

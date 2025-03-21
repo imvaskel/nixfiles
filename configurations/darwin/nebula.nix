@@ -2,9 +2,11 @@
   pkgs,
   flake,
   ...
-}: let
+}:
+let
   inherit (flake.inputs) self lix-module;
-in {
+in
+{
   imports = [
     self.darwinModules.default
     lix-module.nixosModules.lixFromNixpkgs
