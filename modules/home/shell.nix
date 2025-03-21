@@ -9,7 +9,6 @@ in {
   home = {
     packages = with pkgs; [
       nh.packages.${pkgs.system}.default
-      devenv
       uv
       nvim
     ];

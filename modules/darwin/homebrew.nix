@@ -1,6 +1,7 @@
 {...}: {
   homebrew = {
     enable = true;
+    onActivation.upgrade = true;
     casks = [
       "jordanbaird-ice"
       "vlc"

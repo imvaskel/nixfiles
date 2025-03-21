@@ -9,6 +9,8 @@
     font.name = "Maple Mono NF";
     keybindings = {
       "kitty_mod+r" = "kitten resize_window";
+      "alt+h" = "previous_tab";
+      "alt+l" = "next_tab";
     };
     settings = lib.mkMerge [
       {

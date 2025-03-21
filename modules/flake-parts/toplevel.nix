@@ -14,6 +14,7 @@
     nvfCfg = nvf.lib.neovimConfiguration {
       extraSpecialArgs = {
         inherit self';
+        nvfLib = nvf.lib;
       };
       inherit pkgs;
       modules = [../nvim];

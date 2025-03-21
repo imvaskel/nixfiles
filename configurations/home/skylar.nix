@@ -18,11 +18,10 @@
       else "/nixfiles"
     );
 
-  inherit (flake.inputs) self nvf;
+  inherit (flake.inputs) self;
 in {
   imports = [
     self.homeModules.default
-    nvf.homeManagerModules.default
   ];
 
   home = {
