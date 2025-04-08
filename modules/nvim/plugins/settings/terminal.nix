@@ -1,5 +1,8 @@
 {
   vim = {
-    terminal.toggleterm.enable = true;
+    terminal.toggleterm = {
+      enable = true;
+      setupOpts.direction = "float";
+    };
   };
 }

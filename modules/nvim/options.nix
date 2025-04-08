@@ -3,6 +3,10 @@
     vimAlias = true;
     viAlias = true;
 
+    additionalRuntimePaths = [
+      ./runtime
+    ];
+
     preventJunkFiles = true;
 
     enableLuaLoader = true;
@@ -11,6 +15,7 @@
       # Tabs @ 8 spaces is wild
       tabstop = 4;
       shiftwidth = 4;
+      exrc = true;
     };
 
     globals = {

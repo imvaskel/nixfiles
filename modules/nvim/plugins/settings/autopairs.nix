@@ -1,5 +1,6 @@
 {
   vim = {
-    autopairs.nvim-autopairs.enable = true;
+    # tbh better than nvim-autopairs
+    mini.pairs.enable = true;
   };
 }

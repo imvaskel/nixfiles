@@ -10,7 +10,10 @@
       enableExtraDiagnostics = true;
       rust.enable = true;
       nix.enable = true;
-      python.enable = true;
+      python = {
+        enable = true;
+        format.type = "ruff";
+      };
       typst.enable = true;
       lua.enable = true;
       svelte.enable = true;
